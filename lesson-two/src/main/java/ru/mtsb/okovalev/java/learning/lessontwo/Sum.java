@@ -5,8 +5,14 @@ public class Sum {
 		int n = args.length;
 		int[] numbers = new int[n];
 
-		for (int i = 0; i < n; i++) {
-			numbers[i] = Integer.valueOf(args[i]);
+		try {
+			for (int i = 0; i < n; i++) {
+				numbers[i] = Integer.valueOf(args[i]);
+			}
+		} catch (NumberFormatException e) {
+			System.out
+					.println("NumberFormatException\n" + e.getMessage() + "\nAll of arguments must be integer numbers");
+			return;
 		}
 
 		System.out.println(sum(numbers));
