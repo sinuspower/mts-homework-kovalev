@@ -7,7 +7,7 @@ public class Sum {
 
 		try {
 			for (int i = 0; i < n; i++) {
-				numbers[i] = Integer.valueOf(args[i]);
+				numbers[i] = Integer.parseInt(args[i]);
 			}
 		} catch (NumberFormatException e) {
 			System.out
