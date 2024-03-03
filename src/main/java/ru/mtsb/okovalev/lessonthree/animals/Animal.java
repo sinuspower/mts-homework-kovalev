@@ -1,11 +1,11 @@
 package ru.mtsb.okovalev.lessonthree.animals;
 
 public interface Animal {
-	void move();
+    void move();
 
-	void eat();
+    void eat();
 
-	void sound();
-
-	void live();
+    void sound();
+	
+    void live();
 }
