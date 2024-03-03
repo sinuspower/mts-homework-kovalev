@@ -15,7 +15,7 @@ public class CreateAnimalsServiceImpl implements CreateAnimalsService {
             i++;
         } while (i < DEFAULT_ANIMALS_COUNT);
 
-        System.out.println(DEFAULT_ANIMALS_COUNT + " animals created by CreateAnimalsServiceImpl.create()");
+        System.out.println("\t" + DEFAULT_ANIMALS_COUNT + " animals created by CreateAnimalsServiceImpl.create()");
         return animals;
     }
 
@@ -26,7 +26,7 @@ public class CreateAnimalsServiceImpl implements CreateAnimalsService {
             animals.add(randomAnimal());
         }
 
-        System.out.println(n + " animals created by CreateAnimalsServiceImpl.create(" + n + ")");
+        System.out.println("\t" + n + " animals created by CreateAnimalsServiceImpl.create(" + n + ")");
         return animals;
     }
 }

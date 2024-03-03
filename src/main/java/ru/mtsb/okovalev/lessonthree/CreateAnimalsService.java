@@ -1,23 +1,12 @@
 package ru.mtsb.okovalev.lessonthree;
 
 import ru.mtsb.okovalev.lessonthree.animals.*;
+import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalType;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public interface CreateAnimalsService {
     int DEFAULT_ANIMALS_COUNT = 10;
-
-    enum AnimalType {
-        WOLF, SHARK, DOG, CAT;
-
-        private static final Random random = new Random();
-        private static final AnimalType[] animalTypes = values();
-
-        public static AnimalType getRandom() {
-            return animalTypes[random.nextInt(animalTypes.length)];
-        }
-    }
 
     default ArrayList<Animal> create() {
         ArrayList<Animal> animals = new ArrayList<>();
@@ -28,7 +17,7 @@ public interface CreateAnimalsService {
             i++;
         }
 
-        System.out.println(DEFAULT_ANIMALS_COUNT + " animals created by CreateAnimalsService.create()");
+        System.out.println("\t" + DEFAULT_ANIMALS_COUNT + " animals created by CreateAnimalsService.create()");
         return animals;
     }
 

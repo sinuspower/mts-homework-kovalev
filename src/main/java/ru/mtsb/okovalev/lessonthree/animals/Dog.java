@@ -1,33 +1,18 @@
 package ru.mtsb.okovalev.lessonthree.animals;
 
+import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalCharacter;
+import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalName;
+import ru.mtsb.okovalev.lessonthree.animals.enums.DogBreed;
 import ru.mtsb.okovalev.lessonthree.util.RandomEnumValue;
 
 import java.text.DecimalFormat;
 import java.util.Random;
 
 public class Dog extends Pet {
-    @SuppressWarnings("unused")
-    private enum Breed {
-        AFFENPINSCHER("Affenpinscher"), AKITA("Akita"), AUSTRALIAN_SHEPHERD("Australian Shepherd"),
-        BASSET_HOUND("Basset Hound"), BEAGLE("Beagle"), BIEWER_TERRIER("Biewer Terrier"), BOXER("Boxer"),
-        BULLDOG("Bulldog"), BULL_TERRIER("Bull Terrier"), CANE_CORSO("Cane Corso");
-
-        private final String printable;
-
-        Breed(String printable) {
-            this.printable = printable;
-        }
-
-        @Override
-        public String toString() {
-            return this.printable;
-        }
-    }
-
     public Dog() {
-        super(new RandomEnumValue<>(Breed.class).getString(), new RandomEnumValue<>(Character.class).getString(),
-                new RandomEnumValue<>(Name.class).getString(), new Random().nextDouble());
-        this.cost = this.cost * new Random().nextInt(COST_BOUND);
+        super(new RandomEnumValue<>(DogBreed.class).getString(), new RandomEnumValue<>(AnimalCharacter.class).getString(),
+                new RandomEnumValue<>(AnimalName.class).getString(), new Random().nextDouble());
+        this.cost = this.cost * new Random().nextInt(super.COST_BOUND);
     }
 
     @SuppressWarnings("unused")
@@ -58,7 +43,6 @@ public class Dog extends Pet {
 
     @Override
     public void live() {
-        System.out.println(this);
         move();
         eat();
         sound();
