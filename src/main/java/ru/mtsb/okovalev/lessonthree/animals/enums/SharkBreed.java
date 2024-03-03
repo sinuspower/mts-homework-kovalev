@@ -1,5 +1,8 @@
 package ru.mtsb.okovalev.lessonthree.animals.enums;
 
+/**
+ * Перечисление пород акул.
+ */
 @SuppressWarnings("unused")
 public enum SharkBreed {
     ANGEL_SHARK("Angel shark"), BLACKTIP_SHARK("Blacktip shark"), BULL_SHARK("Bull shark"),
@@ -13,6 +16,11 @@ public enum SharkBreed {
         this.printable = printable;
     }
 
+    /**
+     * Возвращает представление породы акулы, применимое для человекочитаемого вывода.
+     *
+     * @return порода акулы в формате для человекочитаемого вывода
+     */
     @Override
     public String toString() {
         return this.printable;
