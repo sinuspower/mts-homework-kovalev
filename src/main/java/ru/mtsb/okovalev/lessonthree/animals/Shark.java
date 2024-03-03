@@ -33,7 +33,7 @@ public class Shark extends Predator {
 
     @Override
     public String toString() {
-        return "Shark {" + "breed: " + getBreed() + ", character: " + getCharacter() + "}";
+        return "{\"Shark\": {" + "\"breed\": \"" + getBreed() + "\", \"character\": \"" + getCharacter() + "\"}}";
     }
 
     @Override

@@ -33,7 +33,7 @@ public class Wolf extends Predator {
 
     @Override
     public String toString() {
-        return "Wolf {" + "breed: " + getBreed() + ", character: " + getCharacter() + "}";
+        return "{\"Wolf\": {" + "\"breed\": \"" + getBreed() + "\", \"character\": \"" + getCharacter() + "\"}}";
     }
 
     @Override

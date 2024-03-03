@@ -7,13 +7,14 @@ import java.util.ArrayList;
 public class Main {
     @SuppressWarnings("all")
     public static void main(String[] args) {
-        CreateAnimalsServiceImpl createAnimalsServiceImpl = new CreateAnimalsServiceImpl();
-        ArrayList<Animal> byCreateAnimalsServiceCreate = createAnimalsServiceImpl.createDefault();
+        ArrayList<Animal> byCreateAnimalsServiceCreate = new CreateAnimalsService() {
+        }.create();
         for (int i = 0; i < byCreateAnimalsServiceCreate.size(); i++) {
             System.out.println(byCreateAnimalsServiceCreate.get(i));
         }
 
         System.out.println();
+        CreateAnimalsServiceImpl createAnimalsServiceImpl = new CreateAnimalsServiceImpl();
         ArrayList<Animal> byCreateAnimalsServiceImplCreate = createAnimalsServiceImpl.create();
         for (Animal animal : byCreateAnimalsServiceImplCreate) {
             System.out.println(animal);

@@ -19,10 +19,6 @@ public class CreateAnimalsServiceImpl implements CreateAnimalsService {
         return animals;
     }
 
-    public ArrayList<Animal> createDefault() {
-        return CreateAnimalsService.super.create();
-    }
-
     public ArrayList<Animal> create(int n) {
         ArrayList<Animal> animals = new ArrayList<>();
 

@@ -37,8 +37,8 @@ public class Dog extends Pet {
 
     @Override
     public String toString() {
-        return "Dog {" + "breed: " + getBreed() + ", character: " + getCharacter() + ", name: " + getName() + ", cost: "
-                + new DecimalFormat("$#0.00").format(getCost()) + "}";
+        return "{\"Dog\": {" + "\"breed\": \"" + getBreed() + "\", \"character\": \"" + getCharacter() + "\", \"name\": \"" + getName() + "\", \"cost\": \""
+                + new DecimalFormat("$#0.00").format(getCost()) + "\"}}";
     }
 
     @Override
