@@ -15,7 +15,7 @@ public class RandomEnumValue<T extends Enum<T>> {
      * Создаёт объект RandomEnumValue, инициализирует массив всех
      * возможных значений переданного на вход перечисления.
      *
-     * @param e Класс перечисления (<Enum>.getClass())
+     * @param e Класс перечисления (Enum.getClass())
      */
     public RandomEnumValue(Class<T> e) {
         values = e.getEnumConstants();
