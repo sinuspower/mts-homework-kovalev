@@ -6,6 +6,9 @@ import ru.mtsb.okovalev.lessonthree.animals.Animal;
 
 import java.time.LocalDate;
 
+/**
+ * Имплементация интерфейса SearchService.
+ */
 public class SearchServiceImpl implements SearchService {
     /**
      * Проверяет, родилось ли животное в високосный год.
