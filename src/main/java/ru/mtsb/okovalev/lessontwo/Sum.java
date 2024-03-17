@@ -22,7 +22,7 @@ public class Sum {
         System.out.println(sum(numbers));
     }
 
-    private static int sum(int... numbers) {
+    public static int sum(int... numbers) {
         int sum = 0;
         for (int number : numbers) {
             sum += number;
