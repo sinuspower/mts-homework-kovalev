@@ -13,6 +13,8 @@ public interface SearchService {
      * Результат проверки выводит в стандартный поток вывода.
      *
      * @param animal Любая имплементация интерфейса Animal
+     * @throws InvalidAnimalException          если параметр animal == null
+     * @throws InvalidAnimalBirthdateException если animal.getBirthdate() возвращает null
      */
     void checkLeapYearAnimal(Animal animal) throws InvalidAnimalException, InvalidAnimalBirthdateException;
 }
