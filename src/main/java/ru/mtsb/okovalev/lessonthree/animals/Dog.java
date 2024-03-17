@@ -25,7 +25,7 @@ public class Dog extends Pet {
                 LocalDate.now().minusDays(new Random().nextInt(AbstractAnimal.BIRTHDATE_DAYS_BOUND)),
                 new Random().nextDouble()
         );
-        this.cost = this.cost * new Random().nextInt(super.COST_BOUND);
+        this.cost = this.cost * new Random().nextInt(Pet.COST_BOUND);
     }
 
     /**
