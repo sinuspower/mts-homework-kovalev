@@ -2,6 +2,7 @@ package ru.mtsb.okovalev.lessonthree;
 
 import ru.mtsb.okovalev.lessonthree.animals.*;
 import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalCharacter;
+import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalName;
 import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalType;
 import ru.mtsb.okovalev.lessonthree.animals.enums.WolfBreed;
 
@@ -60,7 +61,11 @@ public interface CreateAnimalsService {
                 randomAnimal = new Cat();
                 break;
             default:
-                randomAnimal = new Wolf(WolfBreed.RED_WOLF.toString(), AnimalCharacter.NERVOUS.toString());
+                randomAnimal = new Wolf(
+                        WolfBreed.RED_WOLF.toString(),
+                        AnimalCharacter.NERVOUS.toString(),
+                        AnimalName.BABY.toString()
+                );
                 break;
         }
 

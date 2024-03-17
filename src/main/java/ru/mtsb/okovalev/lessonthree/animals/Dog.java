@@ -2,22 +2,27 @@ package ru.mtsb.okovalev.lessonthree.animals;
 
 import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalCharacter;
 import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalName;
+import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalType;
 import ru.mtsb.okovalev.lessonthree.animals.enums.DogBreed;
 import ru.mtsb.okovalev.lessonthree.util.RandomEnumValue;
 
-import java.text.DecimalFormat;
 import java.util.Random;
 
 /**
  * Собака.
  */
 public class Dog extends Pet {
+    private static final AnimalType TYPE = AnimalType.DOG;
+
     /**
      * Создаёт собаку псевдослучайной породы с псевдослучайным характером, кличкой и стоимостью.
      */
     public Dog() {
-        super(new RandomEnumValue<>(DogBreed.class).getString(), new RandomEnumValue<>(AnimalCharacter.class).getString(),
-                new RandomEnumValue<>(AnimalName.class).getString(), new Random().nextDouble());
+        super(TYPE, new RandomEnumValue<>(DogBreed.class).getString(),
+                new RandomEnumValue<>(AnimalCharacter.class).getString(),
+                new RandomEnumValue<>(AnimalName.class).getString(),
+                new Random().nextDouble()
+        );
         this.cost = this.cost * new Random().nextInt(super.COST_BOUND);
     }
 
@@ -31,18 +36,7 @@ public class Dog extends Pet {
      */
     @SuppressWarnings("unused")
     public Dog(String breed, String character, String name, double cost) {
-        super(breed, character, name, cost);
-    }
-
-    /**
-     * Возвращает представление собаки в формате JSON.
-     *
-     * @return компактный (в одну строку) JSON, содержащий объект Dog со всеми полями класса Dog
-     */
-    @Override
-    public String toString() {
-        return "{\"Dog\": {" + "\"breed\": \"" + getBreed() + "\", \"character\": \"" + getCharacter() + "\", \"name\": \"" + getName() + "\", \"cost\": \""
-                + new DecimalFormat("$#0.00").format(getCost()) + "\"}}";
+        super(TYPE, breed, character, name, cost);
     }
 
     /**

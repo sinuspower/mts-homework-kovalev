@@ -1,6 +1,8 @@
 package ru.mtsb.okovalev.lessonthree.animals;
 
 import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalCharacter;
+import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalName;
+import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalType;
 import ru.mtsb.okovalev.lessonthree.animals.enums.WolfBreed;
 import ru.mtsb.okovalev.lessonthree.util.RandomEnumValue;
 
@@ -8,11 +10,16 @@ import ru.mtsb.okovalev.lessonthree.util.RandomEnumValue;
  * Волк.
  */
 public class Wolf extends Predator {
+    private static final AnimalType TYPE = AnimalType.WOLF;
+
     /**
      * Создаёт волка псевдослучайной породы с псевдослучайным характером.
      */
     public Wolf() {
-        super(new RandomEnumValue<>(WolfBreed.class).getString(), new RandomEnumValue<>(AnimalCharacter.class).getString());
+        super(TYPE, new RandomEnumValue<>(WolfBreed.class).getString(),
+                new RandomEnumValue<>(AnimalCharacter.class).getString(),
+                new RandomEnumValue<>(AnimalName.class).getString()
+        );
     }
 
     /**
@@ -20,20 +27,11 @@ public class Wolf extends Predator {
      *
      * @param breed     Порода
      * @param character Характер
+     * @param name      Кличка
      */
     @SuppressWarnings("unused")
-    public Wolf(String breed, String character) {
-        super(breed, character);
-    }
-
-    /**
-     * Возвращает представление волка в формате JSON.
-     *
-     * @return компактный (в одну строку) JSON, содержащий объект Wolf со всеми полями класса Wolf
-     */
-    @Override
-    public String toString() {
-        return "{\"Wolf\": {" + "\"breed\": \"" + getBreed() + "\", \"character\": \"" + getCharacter() + "\"}}";
+    public Wolf(String breed, String character, String name) {
+        super(TYPE, breed, character, name);
     }
 
     /**
@@ -41,7 +39,7 @@ public class Wolf extends Predator {
      */
     @Override
     public void move() {
-        System.out.println("The wolf is running.");
+        System.out.println(getName() + " is running.");
     }
 
     /**
@@ -49,7 +47,7 @@ public class Wolf extends Predator {
      */
     @Override
     public void eat() {
-        System.out.println("The wolf is hunting large hoofed mammals.");
+        System.out.println(getName() + "is hunting large hoofed mammals.");
     }
 
     /**
@@ -57,7 +55,7 @@ public class Wolf extends Predator {
      */
     @Override
     public void sound() {
-        System.out.println("The wolf is howling.");
+        System.out.println(getName() + " is howling.");
     }
 
     /**

@@ -2,22 +2,27 @@ package ru.mtsb.okovalev.lessonthree.animals;
 
 import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalCharacter;
 import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalName;
+import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalType;
 import ru.mtsb.okovalev.lessonthree.animals.enums.CatBreed;
 import ru.mtsb.okovalev.lessonthree.util.RandomEnumValue;
 
-import java.text.DecimalFormat;
 import java.util.Random;
 
 /**
  * Кошка.
  */
 public class Cat extends Pet {
+    private static final AnimalType TYPE = AnimalType.CAT;
+
     /**
      * Создаёт кошку псевдослучайной породы с псевдослучайным характером, кличкой и стоимостью.
      */
     public Cat() {
-        super(new RandomEnumValue<>(CatBreed.class).getString(), new RandomEnumValue<>(AnimalCharacter.class).getString(),
-                new RandomEnumValue<>(AnimalName.class).getString(), new Random().nextDouble());
+        super(TYPE, new RandomEnumValue<>(CatBreed.class).getString(),
+                new RandomEnumValue<>(AnimalCharacter.class).getString(),
+                new RandomEnumValue<>(AnimalName.class).getString(),
+                new Random().nextDouble()
+        );
         this.cost = this.cost * new Random().nextInt(super.COST_BOUND);
     }
 
@@ -31,18 +36,7 @@ public class Cat extends Pet {
      */
     @SuppressWarnings("unused")
     public Cat(String breed, String character, String name, double cost) {
-        super(breed, character, name, cost);
-    }
-
-    /**
-     * Возвращает представление кошки в формате JSON.
-     *
-     * @return компактный (в одну строку) JSON, содержащий объект Cat со всеми полями класса Cat
-     */
-    @Override
-    public String toString() {
-        return "{\"Cat\": {" + "\"breed\": \"" + getBreed() + "\", \"character\": \"" + getCharacter() + "\", \"name\": \"" + getName() + "\", \"cost\": \""
-                + new DecimalFormat("$#0.00").format(getCost()) + "\"}}";
+        super(TYPE, breed, character, name, cost);
     }
 
     /**
@@ -64,6 +58,7 @@ public class Cat extends Pet {
     /**
      * Записывает описание типичного звука, издаваемого кошкой, в стандартный поток вывода.
      */
+
     @Override
     public void sound() {
         System.out.println(getName() + " is mewing.");

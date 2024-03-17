@@ -7,10 +7,26 @@ import java.util.Random;
  * классам, определённым в пакете "ru.mtsb.okovalev.lessonthree.animals".
  */
 public enum AnimalType {
-    WOLF, SHARK, DOG, CAT;
+    WOLF("Wolf"), SHARK("Shark"), DOG("Dog"), CAT("Cat");
+
+    private final String printable;
+
+    AnimalType(String printable) {
+        this.printable = printable;
+    }
 
     private static final Random random = new Random();
     private static final AnimalType[] animalTypes = values();
+
+    /**
+     * Возвращает представление типа животного, применимое для человекочитаемого вывода.
+     *
+     * @return тип животного в формате для человекочитаемого вывода
+     */
+    @Override
+    public String toString() {
+        return this.printable;
+    }
 
     /**
      * Возвращает псевдослучайный вид животного из перечисления AnimalType.

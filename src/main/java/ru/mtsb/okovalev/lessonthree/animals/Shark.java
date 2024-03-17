@@ -1,6 +1,8 @@
 package ru.mtsb.okovalev.lessonthree.animals;
 
 import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalCharacter;
+import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalName;
+import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalType;
 import ru.mtsb.okovalev.lessonthree.animals.enums.SharkBreed;
 import ru.mtsb.okovalev.lessonthree.util.RandomEnumValue;
 
@@ -8,11 +10,16 @@ import ru.mtsb.okovalev.lessonthree.util.RandomEnumValue;
  * Акула.
  */
 public class Shark extends Predator {
+    private static final AnimalType TYPE = AnimalType.SHARK;
+
     /**
      * Создаёт акулу псевдослучайной породы с псевдослучайным характером.
      */
     public Shark() {
-        super(new RandomEnumValue<>(SharkBreed.class).getString(), new RandomEnumValue<>(AnimalCharacter.class).getString());
+        super(TYPE, new RandomEnumValue<>(SharkBreed.class).getString(),
+                new RandomEnumValue<>(AnimalCharacter.class).getString(),
+                new RandomEnumValue<>(AnimalName.class).getString()
+        );
     }
 
     /**
@@ -20,20 +27,11 @@ public class Shark extends Predator {
      *
      * @param breed     Порода
      * @param character Характер
+     * @param name      Кличка
      */
     @SuppressWarnings("unused")
-    public Shark(String breed, String character) {
-        super(breed, character);
-    }
-
-    /**
-     * Возвращает представление акулы в формате JSON.
-     *
-     * @return компактный (в одну строку) JSON, содержащий объект Shark со всеми полями класса Shark
-     */
-    @Override
-    public String toString() {
-        return "{\"Shark\": {" + "\"breed\": \"" + getBreed() + "\", \"character\": \"" + getCharacter() + "\"}}";
+    public Shark(String breed, String character, String name) {
+        super(TYPE, breed, character, name);
     }
 
     /**
@@ -41,7 +39,7 @@ public class Shark extends Predator {
      */
     @Override
     public void move() {
-        System.out.println("The shark is swimming.");
+        System.out.println(getName() + " is swimming.");
     }
 
     /**
@@ -49,7 +47,7 @@ public class Shark extends Predator {
      */
     @Override
     public void eat() {
-        System.out.println("The shark is hunting fish and humans.");
+        System.out.println(getName() + " is hunting fish and humans.");
     }
 
     /**
@@ -57,7 +55,7 @@ public class Shark extends Predator {
      */
     @Override
     public void sound() {
-        System.out.println("The shark is silent.");
+        System.out.println(getName() + " is silent.");
     }
 
     /**
