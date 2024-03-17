@@ -8,6 +8,7 @@ import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalCharacter;
 import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalName;
 import ru.mtsb.okovalev.lessonthree.animals.enums.DogBreed;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Main {
@@ -39,7 +40,7 @@ public class Main {
         System.out.println();
 
         System.out.println("\tDog created by constructor with parameters");
-        Animal dog = new Dog(DogBreed.BOXER.toString(), AnimalCharacter.NERVOUS.toString(), AnimalName.LOLA.toString(), 120.50);
+        Animal dog = new Dog(DogBreed.BOXER.toString(), AnimalCharacter.NERVOUS.toString(), AnimalName.LOLA.toString(), LocalDate.now(), 120.50);
         System.out.println(dog);
         System.out.println("\tdog.sound()");
         dog.sound();

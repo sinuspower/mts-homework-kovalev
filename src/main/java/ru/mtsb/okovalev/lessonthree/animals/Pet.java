@@ -3,6 +3,8 @@ package ru.mtsb.okovalev.lessonthree.animals;
 import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalType;
 
 import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Домашнее животное – расширение базовой абстракции AbstractAnimal.
@@ -13,8 +15,9 @@ public abstract class Pet extends AbstractAnimal {
 
     /**
      * Максимальная стоимость домашнего животного в USD.
+     * Может использоваться для генерации псевдослучайной стоимости.
      */
-    protected final int COST_BOUND = 10000;
+    protected static final int COST_BOUND = 10000;
 
     /**
      * Создаёт домашнее животное с указанными параметрами.
@@ -23,10 +26,11 @@ public abstract class Pet extends AbstractAnimal {
      * @param breed     Порода
      * @param character Характер
      * @param name      Кличка
+     * @param birthdate Дата рождения
      * @param cost      Стоимость в USD в зоомагазине или питомнике
      */
-    public Pet(AnimalType type, String breed, String character, String name, double cost) {
-        super(type, breed, character, name);
+    public Pet(AnimalType type, String breed, String character, String name, LocalDate birthdate, double cost) {
+        super(type, breed, character, name, birthdate);
         this.cost = cost;
     }
 
@@ -71,6 +75,50 @@ public abstract class Pet extends AbstractAnimal {
     }
 
     /**
+     * Возвращает дату рождения домашнего животного.
+     *
+     * @return дата рождения домашнего животного
+     */
+    public LocalDate getBirthdate() {
+        return super.birthdate;
+    }
+
+    /**
+     * Возвращает формат даты рождения домашнего животного.
+     *
+     * @return формат строкового представления даты рождения домашнего животного
+     */
+    public String getBirthdateFormat() {
+        return super.birthdateFormat;
+    }
+
+    /**
+     * Устанавливает формат даты рождения домашнего животного.
+     *
+     * @param format формат строкового представления даты рождения домашнего животного
+     * @throws IllegalArgumentException если параметр format содержит неверный паттерн форматирования даты
+     */
+    public void setBirthdateFormat(String format) throws IllegalArgumentException {
+        try {
+            DateTimeFormatter.ofPattern(format);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(e);
+        }
+
+        this.birthdateFormat = format;
+    }
+
+    /**
+     * Возвращает отформатированное строковое представление даты рождения домашнего животного.
+     *
+     * @return дата рождения домашнего животного в формате this.birthdateFormat
+     */
+    public String getBirthdateFormatted() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(getBirthdateFormat());
+        return super.birthdate.format(dtf);
+    }
+
+    /**
      * Возвращает стоимость домашнего животного в USD.
      *
      * @return стоимость домашнего животного в USD
@@ -91,6 +139,7 @@ public abstract class Pet extends AbstractAnimal {
                 + "\"breed\":\"" + getBreed() + "\","
                 + "\"character\":\"" + getCharacter() + "\","
                 + "\"name\":\"" + getName() + "\","
+                + "\"birthdate\":\"" + getBirthdateFormatted() + "\","
                 + "\"cost\":\"" + new DecimalFormat("$#0.00").format(getCost()) + "\""
                 + "}";
     }

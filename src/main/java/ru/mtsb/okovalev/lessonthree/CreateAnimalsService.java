@@ -6,6 +6,7 @@ import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalName;
 import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalType;
 import ru.mtsb.okovalev.lessonthree.animals.enums.WolfBreed;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -64,7 +65,8 @@ public interface CreateAnimalsService {
                 randomAnimal = new Wolf(
                         WolfBreed.RED_WOLF.toString(),
                         AnimalCharacter.NERVOUS.toString(),
-                        AnimalName.BABY.toString()
+                        AnimalName.BABY.toString(),
+                        LocalDate.now()
                 );
                 break;
         }
