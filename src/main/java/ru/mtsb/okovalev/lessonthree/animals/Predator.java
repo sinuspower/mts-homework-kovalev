@@ -67,6 +67,7 @@ public abstract class Predator extends AbstractAnimal {
      *
      * @return дата рождения дикого хищника
      */
+    @Override
     public LocalDate getBirthdate() {
         return super.birthdate;
     }
@@ -76,6 +77,7 @@ public abstract class Predator extends AbstractAnimal {
      *
      * @return формат строкового представления даты рождения дикого хищника
      */
+    @Override
     public String getBirthdateFormat() {
         return super.birthdateFormat;
     }
@@ -86,6 +88,7 @@ public abstract class Predator extends AbstractAnimal {
      * @param format формат строкового представления даты рождения дикого хищника
      * @throws IllegalArgumentException если параметр format содержит неверный паттерн форматирования даты
      */
+    @Override
     public void setBirthdateFormat(String format) throws IllegalArgumentException {
         try {
             DateTimeFormatter.ofPattern(format);
@@ -101,6 +104,7 @@ public abstract class Predator extends AbstractAnimal {
      *
      * @return дата рождения дикого хищника в формате this.birthdateFormat
      */
+    @Override
     public String getBirthdateFormatted() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(getBirthdateFormat());
         return super.birthdate.format(dtf);

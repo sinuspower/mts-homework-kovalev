@@ -79,6 +79,7 @@ public abstract class Pet extends AbstractAnimal {
      *
      * @return дата рождения домашнего животного
      */
+    @Override
     public LocalDate getBirthdate() {
         return super.birthdate;
     }
@@ -88,6 +89,7 @@ public abstract class Pet extends AbstractAnimal {
      *
      * @return формат строкового представления даты рождения домашнего животного
      */
+    @Override
     public String getBirthdateFormat() {
         return super.birthdateFormat;
     }
@@ -98,11 +100,12 @@ public abstract class Pet extends AbstractAnimal {
      * @param format формат строкового представления даты рождения домашнего животного
      * @throws IllegalArgumentException если параметр format содержит неверный паттерн форматирования даты
      */
+    @Override
     public void setBirthdateFormat(String format) throws IllegalArgumentException {
         try {
             DateTimeFormatter.ofPattern(format);
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(e);
+            throw new IllegalArgumentException("Format string is wrong for date-time formatting");
         }
 
         this.birthdateFormat = format;
@@ -113,6 +116,7 @@ public abstract class Pet extends AbstractAnimal {
      *
      * @return дата рождения домашнего животного в формате this.birthdateFormat
      */
+    @Override
     public String getBirthdateFormatted() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(getBirthdateFormat());
         return super.birthdate.format(dtf);
