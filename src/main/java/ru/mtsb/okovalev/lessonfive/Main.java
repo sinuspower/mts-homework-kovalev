@@ -28,7 +28,7 @@ public class Main {
             }
         }
 
-        System.out.println("\n\tAnimal is null" +
+        System.out.println("\n\tanimal is null" +
                 "\n\tsearchServiceImpl.checkLeapYearAnimal(animal) =>");
         try {
             searchServiceImpl.checkLeapYearAnimal(null);
@@ -44,7 +44,7 @@ public class Main {
                 null,
                 120.50
         );
-        System.out.println("\n\tAnimal.getBirthdate() is null\n" + dog +
+        System.out.println("\n\tanimal.getBirthdate() is null\n" + dog +
                 "\n\tsearchServiceImpl.checkLeapYearAnimal(animal) =>");
         try {
             searchServiceImpl.checkLeapYearAnimal(dog);
