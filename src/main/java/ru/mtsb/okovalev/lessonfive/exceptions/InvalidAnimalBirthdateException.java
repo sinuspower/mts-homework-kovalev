@@ -1,7 +1,7 @@
 package ru.mtsb.okovalev.lessonfive.exceptions;
 
 /**
- * Проверяемое исключение (checked exception).
+ * Проверяемое исключение (checked exception ~ унаследовано от Exception).
  */
 public class InvalidAnimalBirthdateException extends Exception {
     /**

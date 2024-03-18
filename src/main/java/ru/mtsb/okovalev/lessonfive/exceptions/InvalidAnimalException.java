@@ -1,7 +1,7 @@
 package ru.mtsb.okovalev.lessonfive.exceptions;
 
 /**
- * Непроверяемое исключение (unchecked exception, унаследовано от RuntimeException).
+ * Непроверяемое исключение (unchecked exception ~ унаследовано от RuntimeException).
  */
 public class InvalidAnimalException extends RuntimeException {
     /**
