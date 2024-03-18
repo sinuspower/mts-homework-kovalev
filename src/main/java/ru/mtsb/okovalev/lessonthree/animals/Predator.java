@@ -118,11 +118,11 @@ public abstract class Predator extends AbstractAnimal {
     @Override
     public String toString() {
         return "{"
-                + "\"type\":\"" + getType() + "\","
-                + "\"breed\":\"" + getBreed() + "\","
-                + "\"character\":\"" + getCharacter() + "\","
-                + "\"name\":\"" + getName() + "\","
-                + "\"birthdate\":\"" + getBirthdateFormatted() + "\""
+                + "\"type\":" + (this.type == null ? "null," : "\"" + getType() + "\",")
+                + "\"breed\":" + (this.breed == null ? "null," : "\"" + getBreed() + "\",")
+                + "\"character\":" + (this.character == null ? "null," : "\"" + getCharacter() + "\",")
+                + "\"name\":" + (this.name == null ? "null," : "\"" + getName() + "\",")
+                + "\"birthdate\":" + (this.birthdate == null ? "null," : "\"" + getBirthdateFormatted() + "\",")
                 + "}";
     }
 }
