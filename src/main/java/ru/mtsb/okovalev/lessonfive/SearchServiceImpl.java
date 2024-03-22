@@ -31,9 +31,9 @@ public class SearchServiceImpl implements SearchService {
             throw new InvalidAnimalBirthdateException(animal.getType() + " passed for check has not birthdate filled");
         }
 
-        System.out.println(animal.getBirthdate().isLeapYear() ?
-                animal.getName() + " was born on a leap year" :
-                animal.getName() + " was not born on a leap year"
+        System.out.println(animal.getName() + (animal.getBirthdate().isLeapYear() ?
+                " was born on a leap year" :
+                " was not born on a leap year")
         );
     }
 }
