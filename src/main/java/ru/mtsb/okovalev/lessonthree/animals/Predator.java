@@ -122,7 +122,7 @@ public abstract class Predator extends AbstractAnimal {
                 + "\"breed\":" + (this.breed == null ? "null," : "\"" + getBreed() + "\",")
                 + "\"character\":" + (this.character == null ? "null," : "\"" + getCharacter() + "\",")
                 + "\"name\":" + (this.name == null ? "null," : "\"" + getName() + "\",")
-                + "\"birthdate\":" + (this.birthdate == null ? "null," : "\"" + getBirthdateFormatted() + "\",")
+                + "\"birthdate\":" + (this.birthdate == null ? "null," : "\"" + getBirthdateFormatted() + "\"")
                 + "}";
     }
 }
