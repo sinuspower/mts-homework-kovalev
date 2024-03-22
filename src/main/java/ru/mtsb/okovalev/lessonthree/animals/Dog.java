@@ -6,6 +6,7 @@ import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalType;
 import ru.mtsb.okovalev.lessonthree.animals.enums.DogBreed;
 import ru.mtsb.okovalev.lessonthree.util.RandomEnumValue;
 
+import java.time.LocalDate;
 import java.util.Random;
 
 /**
@@ -21,9 +22,10 @@ public class Dog extends Pet {
         super(TYPE, new RandomEnumValue<>(DogBreed.class).getString(),
                 new RandomEnumValue<>(AnimalCharacter.class).getString(),
                 new RandomEnumValue<>(AnimalName.class).getString(),
+                LocalDate.now().minusDays(new Random().nextInt(AbstractAnimal.BIRTHDATE_DAYS_BOUND)),
                 new Random().nextDouble()
         );
-        this.cost = this.cost * new Random().nextInt(super.COST_BOUND);
+        this.cost = this.cost * new Random().nextInt(Pet.COST_BOUND);
     }
 
     /**
@@ -32,11 +34,12 @@ public class Dog extends Pet {
      * @param breed     Порода
      * @param character Характер
      * @param name      Кличка
+     * @param birthdate Дата рождения
      * @param cost      Стоимость в USD в зоомагазине или питомнике
      */
     @SuppressWarnings("unused")
-    public Dog(String breed, String character, String name, double cost) {
-        super(TYPE, breed, character, name, cost);
+    public Dog(String breed, String character, String name, LocalDate birthdate, double cost) {
+        super(TYPE, breed, character, name, birthdate, cost);
     }
 
     /**

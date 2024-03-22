@@ -6,6 +6,9 @@ import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalType;
 import ru.mtsb.okovalev.lessonthree.animals.enums.SharkBreed;
 import ru.mtsb.okovalev.lessonthree.util.RandomEnumValue;
 
+import java.time.LocalDate;
+import java.util.Random;
+
 /**
  * Акула.
  */
@@ -18,7 +21,8 @@ public class Shark extends Predator {
     public Shark() {
         super(TYPE, new RandomEnumValue<>(SharkBreed.class).getString(),
                 new RandomEnumValue<>(AnimalCharacter.class).getString(),
-                new RandomEnumValue<>(AnimalName.class).getString()
+                new RandomEnumValue<>(AnimalName.class).getString(),
+                LocalDate.now().minusDays(new Random().nextInt(AbstractAnimal.BIRTHDATE_DAYS_BOUND))
         );
     }
 
@@ -28,10 +32,11 @@ public class Shark extends Predator {
      * @param breed     Порода
      * @param character Характер
      * @param name      Кличка
+     * @param birthdate Дата рождения
      */
     @SuppressWarnings("unused")
-    public Shark(String breed, String character, String name) {
-        super(TYPE, breed, character, name);
+    public Shark(String breed, String character, String name, LocalDate birthdate) {
+        super(TYPE, breed, character, name, birthdate);
     }
 
     /**
