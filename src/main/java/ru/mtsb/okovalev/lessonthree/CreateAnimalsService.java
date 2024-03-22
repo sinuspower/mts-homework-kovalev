@@ -8,6 +8,8 @@ import ru.mtsb.okovalev.lessonthree.animals.enums.WolfBreed;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Интерфейс содержит методы создания животных.
@@ -34,8 +36,7 @@ public interface CreateAnimalsService {
             animals.add(randomAnimal());
             i++;
         }
-
-        System.out.println("\t" + DEFAULT_ANIMALS_COUNT + " animals created by CreateAnimalsService.create()");
+        
         return animals;
     }
 
@@ -73,4 +74,12 @@ public interface CreateAnimalsService {
 
         return randomAnimal;
     }
+
+    /**
+     * Возвращает ассоциативный массив псевдослучайных животных,
+     * содержащий количество объектов по умолчанию.
+     *
+     * @return ключ - тип животного, значение - список псевдослучайных животных этого типа
+     */
+    Map<String, List<Animal>> createMap();
 }
