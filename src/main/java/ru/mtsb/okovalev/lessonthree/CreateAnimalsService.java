@@ -36,7 +36,7 @@ public interface CreateAnimalsService {
             animals.add(randomAnimal());
             i++;
         }
-        
+
         return animals;
     }
 
@@ -79,7 +79,7 @@ public interface CreateAnimalsService {
      * Возвращает ассоциативный массив псевдослучайных животных,
      * содержащий количество объектов по умолчанию.
      *
-     * @return ключ - тип животного, значение - список псевдослучайных животных этого типа
+     * @return Map(ключ - тип животного, значение - список псевдослучайных животных этого типа)
      */
     Map<String, List<Animal>> createMap();
 }

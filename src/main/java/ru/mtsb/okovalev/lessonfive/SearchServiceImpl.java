@@ -5,6 +5,7 @@ import ru.mtsb.okovalev.lessonfive.exceptions.InvalidAnimalException;
 import ru.mtsb.okovalev.lessonthree.animals.Animal;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * Имплементация интерфейса SearchService.
@@ -22,12 +23,13 @@ public class SearchServiceImpl implements SearchService {
      * @throws InvalidAnimalBirthdateException если animal.getBirthdate() возвращает null
      */
     @Override
+    @SuppressWarnings("all")
     public void checkLeapYearAnimal(Animal animal) throws InvalidAnimalException, InvalidAnimalBirthdateException {
-        if (animal == null) {
+        if (Objects.isNull(animal)) {
             throw new InvalidAnimalException("Incorrect animal has been passed for check at " + LocalDate.now());
         }
 
-        if (animal.getBirthdate() == null) {
+        if (Objects.isNull(animal.getBirthdate())) {
             throw new InvalidAnimalBirthdateException(animal.getType() + " passed for check has not birthdate filled");
         }
 

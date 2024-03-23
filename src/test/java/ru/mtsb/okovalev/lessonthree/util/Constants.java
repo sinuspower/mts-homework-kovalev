@@ -1,4 +1,4 @@
-package ru.mtsb.okovalev.lessonthree.util.providers;
+package ru.mtsb.okovalev.lessonthree.util;
 
 import ru.mtsb.okovalev.lessonthree.animals.Cat;
 import ru.mtsb.okovalev.lessonthree.animals.Dog;

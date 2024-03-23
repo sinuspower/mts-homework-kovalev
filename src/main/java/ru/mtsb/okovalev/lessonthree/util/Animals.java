@@ -28,7 +28,11 @@ public class Animals {
         StringBuilder sb = new StringBuilder("[\n");
         int n = animals.size(), i = 0;
         for (Animal animal : animals) {
-            sb.append("\t").append(animal.toString());
+            if (Objects.isNull(animal)) {
+                sb.append("null");
+            } else {
+                sb.append("\t").append(animal);
+            }
             if (++i < n) {
                 sb.append(",\n");
             } else {
@@ -71,7 +75,7 @@ public class Animals {
                 j = 0;
                 m = animalsList.size();
                 for (Animal animal : animalsList) {
-                    sb.append("\t\t").append(animal.toString());
+                    sb.append("\t\t").append(animal);
                     if (++j < m) {
                         sb.append(",\n");
                     } else {
