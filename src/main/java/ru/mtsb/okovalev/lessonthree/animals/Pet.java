@@ -14,10 +14,11 @@ public abstract class Pet extends AbstractAnimal {
     protected double cost;
 
     /**
-     * Максимальная стоимость домашнего животного в USD.
-     * Может использоваться для генерации псевдослучайной стоимости.
+     * Создаёт "пустое" домашнее животное - указывается только тип.
      */
-    protected static final int COST_BOUND = 10000;
+    public Pet(AnimalType type) {
+        super(type);
+    }
 
     /**
      * Создаёт домашнее животное с указанными параметрами.

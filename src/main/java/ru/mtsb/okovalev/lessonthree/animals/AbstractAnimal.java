@@ -16,14 +16,17 @@ public abstract class AbstractAnimal implements Animal {
     protected String birthdateFormat = BIRTHDATE_FORMAT_DEFAULT;
 
     /**
-     * Максимальный возраст животного в днях.
-     * Может использоваться для генерации псевдослучайной даты рождения.
-     */
-    protected static final int BIRTHDATE_DAYS_BOUND = 10000;
-    /**
      * Паттерн форматирования даты рождения по умолчанию.
      */
     protected static final String BIRTHDATE_FORMAT_DEFAULT = "dd-MM-yyyy";
+
+    /**
+     * Задаёт "пустые" базовые параметры экземпляров дочерних классов,
+     * заполняя только тип животного.
+     */
+    public AbstractAnimal(AnimalType type) {
+        this.type = type;
+    }
 
     /**
      * Задаёт базовые параметры экземпляров дочерних классов.

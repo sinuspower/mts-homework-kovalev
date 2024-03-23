@@ -1,13 +1,8 @@
 package ru.mtsb.okovalev.lessonthree.animals;
 
-import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalCharacter;
-import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalName;
 import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalType;
-import ru.mtsb.okovalev.lessonthree.animals.enums.WolfBreed;
-import ru.mtsb.okovalev.lessonthree.util.RandomEnumValue;
 
 import java.time.LocalDate;
-import java.util.Random;
 
 /**
  * Волк.
@@ -16,14 +11,11 @@ public class Wolf extends Predator {
     private static final AnimalType TYPE = AnimalType.WOLF;
 
     /**
-     * Создаёт волка псевдослучайной породы с псевдослучайным характером.
+     * Создаёт "пустого" волка.
      */
+    @SuppressWarnings("unused")
     public Wolf() {
-        super(TYPE, new RandomEnumValue<>(WolfBreed.class).getString(),
-                new RandomEnumValue<>(AnimalCharacter.class).getString(),
-                new RandomEnumValue<>(AnimalName.class).getString(),
-                LocalDate.now().minusDays(new Random().nextInt(AbstractAnimal.BIRTHDATE_DAYS_BOUND))
-        );
+        super(TYPE);
     }
 
     /**
@@ -34,7 +26,6 @@ public class Wolf extends Predator {
      * @param name      Кличка
      * @param birthdate Дата рождения
      */
-    @SuppressWarnings("unused")
     public Wolf(String breed, String character, String name, LocalDate birthdate) {
         super(TYPE, breed, character, name, birthdate);
     }

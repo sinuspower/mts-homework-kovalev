@@ -10,6 +10,14 @@ import java.time.format.DateTimeFormatter;
  */
 public abstract class Predator extends AbstractAnimal {
     /**
+     * Создаёт "пустого" дикого хищника - указывается только тип.
+     */
+    @SuppressWarnings("unused")
+    public Predator(AnimalType type) {
+        super(type);
+    }
+
+    /**
      * Создаёт дикого хищника с указанными параметрами.
      *
      * @param type      Тип
@@ -122,7 +130,7 @@ public abstract class Predator extends AbstractAnimal {
                 + "\"breed\":" + (this.breed == null ? "null," : "\"" + getBreed() + "\",")
                 + "\"character\":" + (this.character == null ? "null," : "\"" + getCharacter() + "\",")
                 + "\"name\":" + (this.name == null ? "null," : "\"" + getName() + "\",")
-                + "\"birthdate\":" + (this.birthdate == null ? "null," : "\"" + getBirthdateFormatted() + "\"")
+                + "\"birthdate\":" + (this.birthdate == null ? "null" : "\"" + getBirthdateFormatted() + "\"")
                 + "}";
     }
 }
