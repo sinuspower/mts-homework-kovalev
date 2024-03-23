@@ -3,7 +3,7 @@ package ru.mtsb.okovalev.lessonthree.util;
 import java.util.Random;
 
 /**
- * Предоставляет инструменты для получения псейдослучайных значений перечислений.
+ * Предоставляет инструменты для получения псевдослучайных значений перечислений.
  *
  * @param <T> наследник класса Enum, псевдослучайное значение которого необходимо получать
  */
@@ -27,6 +27,7 @@ public class RandomEnumValue<T extends Enum<T>> {
      *
      * @return псевдослучайное значение перечисления
      */
+    @SuppressWarnings("unused")
     public T get() {
         return values[random.nextInt(values.length)];
     }
