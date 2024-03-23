@@ -27,7 +27,7 @@ public class CreateAnimalsServiceImpl implements CreateAnimalsService {
 
         int i = 0;
         do {
-            animals.add(randomAnimal());
+            animals.add(animalsFactory.getRandomAnimal());
             i++;
         } while (i < DEFAULT_ANIMALS_COUNT);
 
@@ -58,7 +58,7 @@ public class CreateAnimalsServiceImpl implements CreateAnimalsService {
         ArrayList<Animal> animals = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
-            animals.add(randomAnimal());
+            animals.add(animalsFactory.getRandomAnimal());
         }
 
         return animals;
@@ -78,7 +78,7 @@ public class CreateAnimalsServiceImpl implements CreateAnimalsService {
         ArrayList<Animal> animalsList;
         String animalType;
         for (int i = 0; i < n; i++) {
-            animal = randomAnimal();
+            animal = animalsFactory.getRandomAnimal();
             animalType = animal.getType().toString();
 
             if (animals.containsKey(animalType)) {

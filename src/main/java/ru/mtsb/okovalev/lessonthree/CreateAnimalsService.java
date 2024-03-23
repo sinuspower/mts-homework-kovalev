@@ -1,12 +1,7 @@
 package ru.mtsb.okovalev.lessonthree;
 
-import ru.mtsb.okovalev.lessonthree.animals.*;
-import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalCharacter;
-import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalName;
-import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalType;
-import ru.mtsb.okovalev.lessonthree.animals.enums.WolfBreed;
+import ru.mtsb.okovalev.lessonthree.animals.Animal;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +14,8 @@ public interface CreateAnimalsService {
      * Размер по умолчанию результирующего массива животных.
      */
     int DEFAULT_ANIMALS_COUNT = 10;
+
+    AnimalsFactory animalsFactory = new AnimalsFactory();
 
     /**
      * Возвращает массив псевдослучайных животных размера по умолчанию.
@@ -33,46 +30,11 @@ public interface CreateAnimalsService {
 
         int i = 0;
         while (i < DEFAULT_ANIMALS_COUNT) {
-            animals.add(randomAnimal());
+            animals.add(animalsFactory.getRandomAnimal());
             i++;
         }
 
         return animals;
-    }
-
-    /**
-     * Возвращает псевдослучайное животное псевдослучайного вида.
-     * По умолчанию – волк породы "Red wolf" с характером "nervous".
-     *
-     * @return псевдослучаное животное
-     */
-    default Animal randomAnimal() {
-        Animal randomAnimal;
-
-        switch (AnimalType.getRandom()) {
-            case WOLF:
-                randomAnimal = new Wolf();
-                break;
-            case SHARK:
-                randomAnimal = new Shark();
-                break;
-            case DOG:
-                randomAnimal = new Dog();
-                break;
-            case CAT:
-                randomAnimal = new Cat();
-                break;
-            default:
-                randomAnimal = new Wolf(
-                        WolfBreed.RED_WOLF.toString(),
-                        AnimalCharacter.NERVOUS.toString(),
-                        AnimalName.BABY.toString(),
-                        LocalDate.now()
-                );
-                break;
-        }
-
-        return randomAnimal;
     }
 
     /**
