@@ -1,4 +1,4 @@
-package ru.mtsb.okovalev.lessonthree.util;
+package ru.mtsb.okovalev;
 
 import ru.mtsb.okovalev.lessonthree.animals.Cat;
 import ru.mtsb.okovalev.lessonthree.animals.Dog;
@@ -9,6 +9,8 @@ import ru.mtsb.okovalev.lessonthree.animals.enums.*;
 import java.time.LocalDate;
 
 public class Constants {
+    public static final String EMPTY_MAP_STRING = "{}";
+    public static final String EMPTY_STRING = "";
     public static final Dog DOG = new Dog(
             DogBreed.AFFENPINSCHER.toString(),
             AnimalCharacter.STRONG.toString(),

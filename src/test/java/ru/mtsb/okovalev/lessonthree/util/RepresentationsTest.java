@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ArgumentsSource;
 import org.junit.jupiter.params.provider.NullSource;
+import ru.mtsb.okovalev.Constants;
 import ru.mtsb.okovalev.lessonthree.animals.Animal;
 import ru.mtsb.okovalev.lessonthree.util.providers.AnimalsArrayListArgumentsProvider;
 import ru.mtsb.okovalev.lessonthree.util.providers.AnimalsMapArgumentsProvider;
@@ -22,20 +23,20 @@ class RepresentationsTest {
     @ParameterizedTest(name = "ArrayList<Animal> is {0}")
     @NullSource
     @DisplayName("Representations.asJson_ArrayListAnimal - list is null")
-    void asJson_arrayList_null(ArrayList<Animal> animals) {
+    void asJson_ArrayListAnimal_null(ArrayList<Animal> animals) {
         assertEquals("[]", Representations.asJson_ArrayListAnimal(animals));
     }
 
     @Test
     @DisplayName("Representations.asJson_ArrayListAnimal - list is empty")
-    void asJson_arrayList_empty() {
+    void asJson_ArrayListAnimal_empty() {
         assertEquals("[]", Representations.asJson_ArrayListAnimal(new ArrayList<>()));
     }
 
     @ParameterizedTest(name = "Animal is {0}")
     @NullSource
     @DisplayName("Representations.asJson_ArrayListAnimal - animal is null")
-    void asJson_arrayList_nullAnimal(Animal animal) {
+    void asJson_ArrayListAnimal_nullAnimal(Animal animal) {
         ArrayList<Animal> animals = new ArrayList<>();
         animals.add(Constants.SHARK);
         animals.add(animal);
@@ -53,27 +54,27 @@ class RepresentationsTest {
     @ParameterizedTest(name = "Map<String, List<Animal>> is {0}")
     @NullSource
     @DisplayName("Representations.asJson_MapStringListAnimal - map is null")
-    void asJson_map_null(Map<String, List<Animal>> animals) {
+    void asJson_MapStringListAnimal_null(Map<String, List<Animal>> animals) {
         assertEquals("{}", Representations.asJson_MapStringListAnimal(animals));
     }
 
     @Test
     @DisplayName("Representations.asJson_MapStringListAnimal - map is empty")
-    void asJson_map_empty() {
+    void asJson_MapStringListAnimal_empty() {
         assertEquals("{}", Representations.asJson_MapAnimalInteger(new HashMap<>()));
     }
 
     @ParameterizedTest(name = "{0}")
     @ArgumentsSource(AnimalsArrayListArgumentsProvider.class)
     @DisplayName("Representations.asJson_ArrayListAnimal - normal lists")
-    void asJson_arrayList(ArrayList<Animal> animals, String expected) {
+    void asJson_ArrayListAnimal(ArrayList<Animal> animals, String expected) {
         assertEquals(expected, Representations.asJson_ArrayListAnimal(animals));
     }
 
     @ParameterizedTest(name = "{0}")
     @ArgumentsSource(AnimalsMapArgumentsProvider.class)
     @DisplayName("Representations.asJson_MapStringListAnimal - normal maps")
-    void asJson_map(Map<String, List<Animal>> animals, String expected) {
+    void asJson_MapStringListAnimal(Map<String, List<Animal>> animals, String expected) {
         assertEquals(expected, Representations.asJson_MapStringListAnimal(animals));
     }
 }

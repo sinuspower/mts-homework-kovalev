@@ -3,8 +3,8 @@ package ru.mtsb.okovalev.lessonthree.util.providers;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
+import ru.mtsb.okovalev.Constants;
 import ru.mtsb.okovalev.lessonthree.animals.*;
-import ru.mtsb.okovalev.lessonthree.util.Constants;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
