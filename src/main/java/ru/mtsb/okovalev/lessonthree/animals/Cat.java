@@ -26,9 +26,18 @@ public class Cat extends Pet {
      * @param birthdate Дата рождения
      * @param cost      Стоимость в USD в зоомагазине или питомнике
      */
-    @SuppressWarnings("unused")
     public Cat(String breed, String character, String name, LocalDate birthdate, double cost) {
         super(TYPE, breed, character, name, birthdate, cost);
+    }
+
+    /**
+     * Создаёт кошку как копию другой кошки.
+     *
+     * @param source Исходная кошка для копирования.
+     */
+    @SuppressWarnings("unused")
+    public Cat(Cat source) {
+        super(source);
     }
 
     /**

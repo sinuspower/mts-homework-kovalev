@@ -39,6 +39,16 @@ public abstract class Pet extends AbstractAnimal {
     }
 
     /**
+     * Создаёт домашнее животное как копию другого домашнего животного.
+     *
+     * @param source Исходное домашнее животное для копирования.
+     */
+    public Pet(Pet source) {
+        super(source);
+        this.cost = source.cost;
+    }
+
+    /**
      * Возвращает тип домашнего животного.
      *
      * @return тип домашнего животного
@@ -151,7 +161,7 @@ public abstract class Pet extends AbstractAnimal {
                 + "\"cost\":\"" + new DecimalFormat("$#0.00").format(getCost()) + "\""
                 + "}";
     }
-    
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

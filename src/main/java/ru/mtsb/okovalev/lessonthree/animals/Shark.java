@@ -30,6 +30,15 @@ public class Shark extends Predator {
     }
 
     /**
+     * Создаёт акулу как копию другой акулы.
+     *
+     * @param source Исходная акула для копирования.
+     */
+    public Shark(Shark source) {
+        super(source);
+    }
+
+    /**
      * Записывает описание типичного способа перемещения акулы в стандартный поток вывода.
      */
     @Override

@@ -31,6 +31,16 @@ public class Wolf extends Predator {
     }
 
     /**
+     * Создаёт волка как копию другого волка.
+     *
+     * @param source Исходный волк для копирования.
+     */
+    @SuppressWarnings("unused")
+    public Wolf(Wolf source) {
+        super(source);
+    }
+
+    /**
      * Записывает описание типичного способа перемещения волка в стандартный поток вывода.
      */
     @Override

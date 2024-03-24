@@ -32,6 +32,16 @@ public class Dog extends Pet {
     }
 
     /**
+     * Создаёт собаку как копию другой собаки.
+     *
+     * @param source Исходная собака для копирования.
+     */
+    @SuppressWarnings("unused")
+    public Dog(Dog source) {
+        super(source);
+    }
+
+    /**
      * Записывает описание типичного способа перемещения собаки в стандартный поток вывода.
      */
     @Override

@@ -50,6 +50,19 @@ public abstract class AbstractAnimal implements Animal {
     }
 
     /**
+     * Создаёт новый объект в виде копии заданного объекта.
+     *
+     * @param source Исходный объект для копирования
+     */
+    public AbstractAnimal(AbstractAnimal source) {
+        this.type = source.type;
+        this.breed = source.breed;
+        this.character = source.character;
+        this.name = source.name;
+        this.birthdate = source.birthdate;
+    }
+
+    /**
      * Устанавливает дату рождения животного.
      *
      * @param birthdate Новая дата рождения

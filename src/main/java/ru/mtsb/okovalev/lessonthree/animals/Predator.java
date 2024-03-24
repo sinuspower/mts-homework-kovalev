@@ -33,6 +33,15 @@ public abstract class Predator extends AbstractAnimal {
     }
 
     /**
+     * Создаёт дикого хищника как копию другого дикого хищника.
+     *
+     * @param source Исходный дикий хищник для копирования.
+     */
+    public Predator(Predator source) {
+        super(source);
+    }
+
+    /**
      * Возвращает тип дикого хищника.
      *
      * @return тип дикого хищника
