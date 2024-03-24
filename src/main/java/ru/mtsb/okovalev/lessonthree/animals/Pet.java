@@ -5,6 +5,7 @@ import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalType;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 /**
  * Домашнее животное – расширение базовой абстракции AbstractAnimal.
@@ -15,6 +16,8 @@ public abstract class Pet extends AbstractAnimal {
 
     /**
      * Создаёт "пустое" домашнее животное - указывается только тип.
+     *
+     * @param type Тип животного
      */
     public Pet(AnimalType type) {
         super(type);
@@ -147,5 +150,19 @@ public abstract class Pet extends AbstractAnimal {
                 + "\"birthdate\":" + (this.birthdate == null ? "null," : "\"" + getBirthdateFormatted() + "\",")
                 + "\"cost\":\"" + new DecimalFormat("$#0.00").format(getCost()) + "\""
                 + "}";
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Pet)) return false;
+        if (!super.equals(o)) return false;
+        Pet pet = (Pet) o;
+        return Double.compare(getCost(), pet.getCost()) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getCost());
     }
 }

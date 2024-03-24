@@ -44,6 +44,14 @@ public interface Animal {
     LocalDate getBirthdate();
 
     /**
+     * Устанавливает дату рождения животного.
+     *
+     * @param birthdate Новая дата рождения
+     * @throws IllegalArgumentException если новая дата рождения больше текущей даты
+     */
+    void setBirthdate(LocalDate birthdate) throws IllegalArgumentException;
+
+    /**
      * Возвращает формат строкового представления даты рождения животного.
      *
      * @return формат строкового представления даты рождения животного
@@ -64,6 +72,13 @@ public interface Animal {
      * @return дата рождения животного в формате this.getBirthdateFormat()
      */
     String getBirthdateFormatted();
+
+    /**
+     * Возвращает возраст животного в годах.
+     *
+     * @return возраст животного в годах
+     */
+    int getAgeYears();
 
     /**
      * Движение.
