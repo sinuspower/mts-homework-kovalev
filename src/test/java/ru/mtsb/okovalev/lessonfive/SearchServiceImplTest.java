@@ -29,7 +29,7 @@ class SearchServiceImplTest {
 
     static class LeapYearAnimalsArgumentsProvider implements ArgumentsProvider {
         @Override
-        public Stream<? extends Arguments> provideArguments(ExtensionContext context) throws Exception {
+        public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
             return Stream.of(
                     Arguments.of(new Cat(CatBreed.JAVANESE.toString(), AnimalCharacter.CHOLERIC.toString(), AnimalName.TWEETY.toString(), LocalDate.of(2012, 11, 12), 1200)),
                     Arguments.of(new Cat(CatBreed.BURMILLA.toString(), AnimalCharacter.BLOOD.toString(), AnimalName.CESAR.toString(), LocalDate.of(2004, 2, 29), 10000)),
@@ -40,7 +40,7 @@ class SearchServiceImplTest {
 
     static class NotLeapYearAnimalsArgumentsProvider implements ArgumentsProvider {
         @Override
-        public Stream<? extends Arguments> provideArguments(ExtensionContext context) throws Exception {
+        public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
             return Stream.of(
                     Arguments.of(new Wolf(WolfBreed.MEXICAN_WOLF.toString(), AnimalCharacter.AMBITIOUS.toString(), AnimalName.CUDDLES.toString(), LocalDate.of(2001, 7, 14))),
                     Arguments.of(new Dog(DogBreed.AFFENPINSCHER.toString(), AnimalCharacter.PASSIONATE.toString(), AnimalName.DAISY.toString(), LocalDate.of(2019, 9, 2), 300)),
@@ -62,6 +62,7 @@ class SearchServiceImplTest {
     @Test
     @DisplayName("Animal is null")
     void checkLeapYearAnimal_animalIsNull() {
+        @SuppressWarnings("all")
         InvalidAnimalException thrown = assertThrows(InvalidAnimalException.class, new Executable() {
             @Override
             public void execute() throws InvalidAnimalBirthdateException {
@@ -88,6 +89,7 @@ class SearchServiceImplTest {
                 null
         );
 
+        @SuppressWarnings("all")
         InvalidAnimalBirthdateException thrown = assertThrows(InvalidAnimalBirthdateException.class, new Executable() {
             @Override
             public void execute() throws InvalidAnimalBirthdateException {
@@ -102,10 +104,7 @@ class SearchServiceImplTest {
     @ArgumentsSource(LeapYearAnimalsArgumentsProvider.class)
     @DisplayName("Animals was born on a leap year")
     void checkLeapYearAnimal_bornOnLeapYear(Animal animal) {
-        assertDoesNotThrow(() -> {
-            searchServiceImpl.checkLeapYearAnimal(animal);
-        });
-
+        assertDoesNotThrow(() -> searchServiceImpl.checkLeapYearAnimal(animal));
         assertEquals(animal.getName() + " was born on a leap year", outputStreamCaptor.toString().trim());
     }
 
@@ -113,10 +112,7 @@ class SearchServiceImplTest {
     @ArgumentsSource(NotLeapYearAnimalsArgumentsProvider.class)
     @DisplayName("Animals was not born on a leap year")
     void checkLeapYearAnimal_notBornOnLeapYear(Animal animal) {
-        assertDoesNotThrow(() -> {
-            searchServiceImpl.checkLeapYearAnimal(animal);
-        });
-
+        assertDoesNotThrow(() -> searchServiceImpl.checkLeapYearAnimal(animal));
         assertEquals(animal.getName() + " was not born on a leap year", outputStreamCaptor.toString().trim());
     }
 }

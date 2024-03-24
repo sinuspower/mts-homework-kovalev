@@ -7,7 +7,7 @@ import ru.mtsb.okovalev.lessonthree.animals.Shark;
 import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalCharacter;
 import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalName;
 import ru.mtsb.okovalev.lessonthree.animals.enums.DogBreed;
-import ru.mtsb.okovalev.lessonthree.util.Animals;
+import ru.mtsb.okovalev.lessonthree.util.Representations;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -26,17 +26,17 @@ public class Main {
         }.create();
         System.out.println("\t" + CreateAnimalsService.DEFAULT_ANIMALS_COUNT +
                 " animals created by CreateAnimalsService.create()");
-        System.out.println(Animals.asJson(byCreateAnimalsServiceCreate) + "\n");
+        System.out.println(Representations.asJson_ArrayListAnimal(byCreateAnimalsServiceCreate) + "\n");
 
         ArrayList<Animal> byCreateAnimalsServiceImplCreate = createAnimalsServiceImpl.create();
         System.out.println("\t" + CreateAnimalsService.DEFAULT_ANIMALS_COUNT +
                 " animals created by CreateAnimalsServiceImpl.create()");
-        System.out.println(Animals.asJson(byCreateAnimalsServiceImplCreate) + "\n");
+        System.out.println(Representations.asJson_ArrayListAnimal(byCreateAnimalsServiceImplCreate) + "\n");
 
         int n = 4;
         ArrayList<Animal> byCreateAnimalsServiceImplCreateN = createAnimalsServiceImpl.create(n);
         System.out.println("\t" + n + " animals created by CreateAnimalsServiceImpl.create(" + n + ")");
-        System.out.println(Animals.asJson(byCreateAnimalsServiceImplCreateN) + "\n");
+        System.out.println(Representations.asJson_ArrayListAnimal(byCreateAnimalsServiceImplCreateN) + "\n");
 
         System.out.println("\tCat created by constructor without parameters");
         Animal cat = new Cat();

@@ -18,23 +18,23 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class AnimalsTest {
+class RepresentationsTest {
     @ParameterizedTest(name = "ArrayList<Animal> is {0}")
     @NullSource
-    @DisplayName("Animals.asJson : ArrayList<Animal> - list is null")
+    @DisplayName("Representations.asJson_ArrayListAnimal - list is null")
     void asJson_arrayList_null(ArrayList<Animal> animals) {
-        assertEquals("[]", Animals.asJson(animals));
+        assertEquals("[]", Representations.asJson_ArrayListAnimal(animals));
     }
 
     @Test
-    @DisplayName("Animals.asJson : ArrayList<Animal> - list is empty")
+    @DisplayName("Representations.asJson_ArrayListAnimal - list is empty")
     void asJson_arrayList_empty() {
-        assertEquals("[]", Animals.asJson(new ArrayList<>()));
+        assertEquals("[]", Representations.asJson_ArrayListAnimal(new ArrayList<>()));
     }
 
     @ParameterizedTest(name = "Animal is {0}")
     @NullSource
-    @DisplayName("Animals.asJson : ArrayList<Animal> - animal is null")
+    @DisplayName("Representations.asJson_ArrayListAnimal - animal is null")
     void asJson_arrayList_nullAnimal(Animal animal) {
         ArrayList<Animal> animals = new ArrayList<>();
         animals.add(Constants.SHARK);
@@ -47,33 +47,33 @@ class AnimalsTest {
                 "null,\n" +
                 "\t{\"type\":\"Cat\",\"breed\":\"Javanese\",\"character\":\"phlegmatic\",\"name\":\"Bambi\",\"birthdate\":\"" +
                 LocalDate.of(2011, 12, 26).format(DateTimeFormatter.ofPattern(Constants.CAT.getBirthdateFormat())) + "\",\"cost\":\"$1200,00\"}\n" +
-                "]", Animals.asJson(animals));
+                "]", Representations.asJson_ArrayListAnimal(animals));
     }
 
     @ParameterizedTest(name = "Map<String, List<Animal>> is {0}")
     @NullSource
-    @DisplayName("Animals.asJson : Map<String, List<Animal>> - map is null")
+    @DisplayName("Representations.asJson_MapStringListAnimal - map is null")
     void asJson_map_null(Map<String, List<Animal>> animals) {
-        assertEquals("{}", Animals.asJson(animals));
+        assertEquals("{}", Representations.asJson_MapStringListAnimal(animals));
     }
 
     @Test
-    @DisplayName("Animals.asJson : Map<String, List<Animal>> - map is empty")
+    @DisplayName("Representations.asJson_MapStringListAnimal - map is empty")
     void asJson_map_empty() {
-        assertEquals("{}", Animals.asJson(new HashMap<>()));
+        assertEquals("{}", Representations.asJson_MapAnimalInteger(new HashMap<>()));
     }
 
     @ParameterizedTest(name = "{0}")
     @ArgumentsSource(AnimalsArrayListArgumentsProvider.class)
-    @DisplayName("Animals.asJson : ArrayList<Animal> animals - normal lists")
+    @DisplayName("Representations.asJson_ArrayListAnimal - normal lists")
     void asJson_arrayList(ArrayList<Animal> animals, String expected) {
-        assertEquals(expected, Animals.asJson(animals));
+        assertEquals(expected, Representations.asJson_ArrayListAnimal(animals));
     }
 
     @ParameterizedTest(name = "{0}")
     @ArgumentsSource(AnimalsMapArgumentsProvider.class)
-    @DisplayName("Animals.asJson : Map<String, List<Animal>> - normal maps")
+    @DisplayName("Representations.asJson_MapStringListAnimal - normal maps")
     void asJson_map(Map<String, List<Animal>> animals, String expected) {
-        assertEquals(expected, Animals.asJson(animals));
+        assertEquals(expected, Representations.asJson_MapStringListAnimal(animals));
     }
 }

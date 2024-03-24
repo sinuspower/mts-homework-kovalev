@@ -38,7 +38,7 @@ public class CreateAnimalsServiceImpl implements CreateAnimalsService {
      * Возвращает ассоциативный массив псевдослучайных животных,
      * содержащий количество объектов по умолчанию.
      *
-     * @return Map(ключ - тип животного, значение - список псевдослучайных животных этого типа)
+     * @return Map; ключ - тип животного, значение - список псевдослучайных животных этого типа
      */
     @Override
     public Map<String, List<Animal>> createMap() {
@@ -69,7 +69,7 @@ public class CreateAnimalsServiceImpl implements CreateAnimalsService {
      * содержащий в общей сложности заданное количество объектов.
      *
      * @param n Количество животных, которых необходимо создать
-     * @return Map(ключ - тип животного, значение - список псевдослучайных животных этого типа)
+     * @return Map; ключ - тип животного, значение - список псевдослучайных животных этого типа
      */
     public Map<String, List<Animal>> createMap(int n) {
         HashMap<String, List<Animal>> animals = new HashMap<>();

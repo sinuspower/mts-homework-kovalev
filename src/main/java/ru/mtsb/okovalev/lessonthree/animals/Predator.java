@@ -11,6 +11,8 @@ import java.time.format.DateTimeFormatter;
 public abstract class Predator extends AbstractAnimal {
     /**
      * Создаёт "пустого" дикого хищника - указывается только тип.
+     *
+     * @param type Тип животного
      */
     @SuppressWarnings("unused")
     public Predator(AnimalType type) {
