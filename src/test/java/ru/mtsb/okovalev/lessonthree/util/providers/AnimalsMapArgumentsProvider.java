@@ -53,7 +53,7 @@ public class AnimalsMapArgumentsProvider implements ArgumentsProvider {
         return "{\n" +
                 "\t\"Dog\": [\n" +
                 "\t\t{\"type\":\"Dog\",\"breed\":\"Affenpinscher\",\"character\":\"strong\",\"name\":\"Cuddles\",\"birthdate\":\"" +
-                LocalDate.now().format(DateTimeFormatter.ofPattern(dog.getBirthdateFormat())) + "\",\"cost\":\"$300,00\"}\n" +
+                LocalDate.of(2020, 3, 24).format(DateTimeFormatter.ofPattern(dog.getBirthdateFormat())) + "\",\"cost\":\"$300,00\"}\n" +
                 "\t],\n" +
                 "\t\"Cat\": null\n" +
                 "}";
@@ -71,7 +71,7 @@ public class AnimalsMapArgumentsProvider implements ArgumentsProvider {
                 "\t\"Shark\": [],\n" +
                 "\t\"Wolf\": [\n" +
                 "\t\t{\"type\":\"Wolf\",\"breed\":\"Mexican wolf\",\"character\":\"phlegmatic\",\"name\":\"Cesar\",\"birthdate\":\"" +
-                LocalDate.now().format(DateTimeFormatter.ofPattern(wolf.getBirthdateFormat())) + "\"}\n" +
+                LocalDate.of(2020, 3, 24).format(DateTimeFormatter.ofPattern(wolf.getBirthdateFormat())) + "\"}\n" +
                 "\t]\n" +
                 "}";
     }
@@ -97,7 +97,7 @@ public class AnimalsMapArgumentsProvider implements ArgumentsProvider {
                 "\t\"Shark\": null,\n" +
                 "\t\"Dog\": [\n" +
                 "\t\t{\"type\":\"Dog\",\"breed\":\"Affenpinscher\",\"character\":\"strong\",\"name\":\"Cuddles\",\"birthdate\":\"" +
-                LocalDate.now().format(DateTimeFormatter.ofPattern(dog.getBirthdateFormat())) + "\",\"cost\":\"$300,00\"}\n" +
+                LocalDate.of(2020, 3, 24).format(DateTimeFormatter.ofPattern(dog.getBirthdateFormat())) + "\",\"cost\":\"$300,00\"}\n" +
                 "\t],\n" +
                 "\t\"Wolf\": []\n" +
                 "}";
@@ -131,11 +131,11 @@ public class AnimalsMapArgumentsProvider implements ArgumentsProvider {
                 "\t],\n" +
                 "\t\"Dog\": [\n" +
                 "\t\t{\"type\":\"Dog\",\"breed\":\"Affenpinscher\",\"character\":\"strong\",\"name\":\"Cuddles\",\"birthdate\":\"" +
-                LocalDate.now().format(DateTimeFormatter.ofPattern(dog.getBirthdateFormat())) + "\",\"cost\":\"$300,00\"}\n" +
+                LocalDate.of(2020, 3, 24).format(DateTimeFormatter.ofPattern(dog.getBirthdateFormat())) + "\",\"cost\":\"$300,00\"}\n" +
                 "\t],\n" +
                 "\t\"Wolf\": [\n" +
                 "\t\t{\"type\":\"Wolf\",\"breed\":\"Mexican wolf\",\"character\":\"phlegmatic\",\"name\":\"Cesar\",\"birthdate\":\"" +
-                LocalDate.now().format(DateTimeFormatter.ofPattern(wolf.getBirthdateFormat())) + "\"}\n" +
+                LocalDate.of(2020, 3, 24).format(DateTimeFormatter.ofPattern(wolf.getBirthdateFormat())) + "\"}\n" +
                 "\t]\n" +
                 "}";
     }

@@ -44,7 +44,7 @@ public class AnimalsArrayListArgumentsProvider implements ArgumentsProvider {
 
         return "[\n" +
                 "\t{\"type\":\"Dog\",\"breed\":\"Affenpinscher\",\"character\":\"strong\",\"name\":\"Cuddles\",\"birthdate\":\"" +
-                LocalDate.now().format(DateTimeFormatter.ofPattern(dog.getBirthdateFormat())) + "\",\"cost\":\"$300,00\"}\n" +
+                LocalDate.of(2020, 3, 24).format(DateTimeFormatter.ofPattern(dog.getBirthdateFormat())) + "\",\"cost\":\"$300,00\"}\n" +
                 "]";
     }
 
@@ -54,7 +54,7 @@ public class AnimalsArrayListArgumentsProvider implements ArgumentsProvider {
 
         return "[\n" +
                 "\t{\"type\":\"Dog\",\"breed\":\"Affenpinscher\",\"character\":\"strong\",\"name\":\"Cuddles\",\"birthdate\":\"" +
-                LocalDate.now().format(DateTimeFormatter.ofPattern(dog.getBirthdateFormat())) + "\",\"cost\":\"$300,00\"},\n" +
+                LocalDate.of(2020, 3, 24).format(DateTimeFormatter.ofPattern(dog.getBirthdateFormat())) + "\",\"cost\":\"$300,00\"},\n" +
                 "\t{\"type\":\"Cat\",\"breed\":\"Javanese\",\"character\":\"phlegmatic\",\"name\":\"Bambi\",\"birthdate\":\"" +
                 LocalDate.of(2011, 12, 26).format(DateTimeFormatter.ofPattern(cat.getBirthdateFormat())) + "\",\"cost\":\"$1200,00\"}\n" +
                 "]";
@@ -67,7 +67,7 @@ public class AnimalsArrayListArgumentsProvider implements ArgumentsProvider {
 
         return "[\n" +
                 "\t{\"type\":\"Dog\",\"breed\":\"Affenpinscher\",\"character\":\"strong\",\"name\":\"Cuddles\",\"birthdate\":\"" +
-                LocalDate.now().format(DateTimeFormatter.ofPattern(dog.getBirthdateFormat())) + "\",\"cost\":\"$300,00\"},\n" +
+                LocalDate.of(2020, 3, 24).format(DateTimeFormatter.ofPattern(dog.getBirthdateFormat())) + "\",\"cost\":\"$300,00\"},\n" +
                 "\t{\"type\":\"Cat\",\"breed\":\"Javanese\",\"character\":\"phlegmatic\",\"name\":\"Bambi\",\"birthdate\":\"" +
                 LocalDate.of(2011, 12, 26).format(DateTimeFormatter.ofPattern(cat.getBirthdateFormat())) + "\",\"cost\":\"$1200,00\"},\n" +
                 "\t{\"type\":\"Shark\",\"breed\":\"Bull shark\",\"character\":\"sentimental\",\"name\":\"Daisy\",\"birthdate\":\"" +
@@ -83,13 +83,13 @@ public class AnimalsArrayListArgumentsProvider implements ArgumentsProvider {
 
         return "[\n" +
                 "\t{\"type\":\"Dog\",\"breed\":\"Affenpinscher\",\"character\":\"strong\",\"name\":\"Cuddles\",\"birthdate\":\"" +
-                LocalDate.now().format(DateTimeFormatter.ofPattern(dog.getBirthdateFormat())) + "\",\"cost\":\"$300,00\"},\n" +
+                LocalDate.of(2020, 3, 24).format(DateTimeFormatter.ofPattern(dog.getBirthdateFormat())) + "\",\"cost\":\"$300,00\"},\n" +
                 "\t{\"type\":\"Cat\",\"breed\":\"Javanese\",\"character\":\"phlegmatic\",\"name\":\"Bambi\",\"birthdate\":\"" +
                 LocalDate.of(2011, 12, 26).format(DateTimeFormatter.ofPattern(cat.getBirthdateFormat())) + "\",\"cost\":\"$1200,00\"},\n" +
                 "\t{\"type\":\"Shark\",\"breed\":\"Bull shark\",\"character\":\"sentimental\",\"name\":\"Daisy\",\"birthdate\":\"" +
                 LocalDate.of(1991, 4, 20).format(DateTimeFormatter.ofPattern(shark.getBirthdateFormat())) + "\"},\n" +
                 "\t{\"type\":\"Wolf\",\"breed\":\"Mexican wolf\",\"character\":\"phlegmatic\",\"name\":\"Cesar\",\"birthdate\":\"" +
-                LocalDate.now().format(DateTimeFormatter.ofPattern(wolf.getBirthdateFormat())) + "\"}\n" +
+                LocalDate.of(2020, 3, 24).format(DateTimeFormatter.ofPattern(wolf.getBirthdateFormat())) + "\"}\n" +
                 "]";
     }
 }

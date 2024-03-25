@@ -15,7 +15,7 @@ public class Constants {
             DogBreed.AFFENPINSCHER.toString(),
             AnimalCharacter.STRONG.toString(),
             AnimalName.CUDDLES.toString(),
-            LocalDate.now(),
+            LocalDate.of(2020, 3, 24),
             300
     );
 
@@ -38,6 +38,6 @@ public class Constants {
             WolfBreed.MEXICAN_WOLF.toString(),
             AnimalCharacter.PHLEGMATIC.toString(),
             AnimalName.CESAR.toString(),
-            LocalDate.now()
+            LocalDate.of(2020, 3, 24)
     );
 }

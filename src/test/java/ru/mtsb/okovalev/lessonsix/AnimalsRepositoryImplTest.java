@@ -69,7 +69,7 @@ class AnimalsRepositoryImplTest {
     @DisplayName("AnimalsRepositoryImpl.findLeapYearNames - normal")
     void findLeapYearNames() {
         assertEquals(
-                "{Wolf Cesar=[2024-03-24], Dog Cuddles=[2024-03-24]}",
+                "{Wolf Cesar=[2020-03-24], Dog Cuddles=[2020-03-24]}",
                 animalsRepositoryImpl.findLeapYearNames(constantsCatSharkDogWolf).toString()
         );
     }
