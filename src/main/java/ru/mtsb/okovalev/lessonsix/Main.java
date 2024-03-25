@@ -39,7 +39,7 @@ public class Main {
         ArrayList<Animal> withDuplicates = withDuplicates();
         System.out.println("\twithDuplicates:\n" + Representations.asJson_ArrayListAnimal(withDuplicates));
         System.out.println("\tAnimalsRepositoryImpl.findDuplicates(withDuplicates)");
-        Map<String, Integer> duplicates = animalsRepositoryImpl.findAllDuplicates(withDuplicates);
+        Map<String, List<Animal>> duplicates = animalsRepositoryImpl.findAllDuplicates(withDuplicates);
         System.out.println("\t" + duplicates);
     }
 

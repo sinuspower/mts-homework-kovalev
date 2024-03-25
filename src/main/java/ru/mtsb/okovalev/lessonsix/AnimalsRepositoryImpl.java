@@ -1,10 +1,10 @@
 package ru.mtsb.okovalev.lessonsix;
 
 import ru.mtsb.okovalev.lessonthree.animals.Animal;
-import ru.mtsb.okovalev.lessonthree.animals.Dog;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Имплементация интерфейса AnimalsRepository.
@@ -19,30 +19,22 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      */
     @Override
     public Map<String, List<LocalDate>> findLeapYearNames(List<Animal> animals) {
-        if (Objects.isNull(animals) || animals.isEmpty()) {
+        if (Objects.isNull(animals)) {
             return new HashMap<>();
         }
 
-        Map<String, List<LocalDate>> result = new HashMap<>();
-
-        LocalDate birthdate;
-        ArrayList<LocalDate> birthdates;
-        String key;
-        for (Animal animal : animals) {
-            birthdate = animal.getBirthdate();
-            if (birthdate.isLeapYear()) {
-                key = animal.getType() + " " + animal.getName();
-                if (result.containsKey(key)) {
-                    result.get(key).add(birthdate);
-                } else {
-                    birthdates = new ArrayList<>();
-                    birthdates.add(birthdate);
-                    result.put(key, birthdates);
-                }
-            }
-        }
-
-        return result;
+        return animals
+                .stream()
+                .filter(a -> a.getBirthdate().isLeapYear())
+                .collect(
+                        Collectors.groupingBy(
+                                a -> a.getType() + " " + a.getName(),
+                                Collectors.mapping(
+                                        Animal::getBirthdate,
+                                        Collectors.toList()
+                                )
+                        )
+                );
     }
 
     /**
@@ -62,62 +54,84 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
 
         Map<Animal, Integer> result = new HashMap<>();
 
-        int ageYears;
-        Animal oldest = new Dog(); // birthdate is null => oldest.getAgeYears() = 0
-        for (Animal animal : animals) {
-            ageYears = animal.getAgeYears();
-            if (ageYears > ageYearsBound) {
-                result.put(animal, ageYears);
-            }
-            if (oldest.getAgeYears() < ageYears) {
-                oldest = animal;
-            }
-        }
-
-        if (result.isEmpty()) {
-            result.put(oldest, oldest.getAgeYears());
-        }
+        // Stream API
 
         return result;
     }
 
     /**
-     * Выводит на экран дубликаты животных и возвращает количества найденных дубликатов для каждого
+     * Выводит на экран дубликаты животных и возвращает списки найденных дубликатов для каждого
      * типа животного из входящего массива. Находит все дубликаты, то есть для двух одинаковых животных
-     * в исходном массиве выводит на экран их оба, а в соответствующее количество в результирующем
-     * ассоциативном массиве записывает число 2.
+     * в исходном массиве выводит на экран и добавляет в результирующий список дубликатов их обоих.
      *
      * @param animals Массив животных
-     * @return Map; ключ - тип животного, значение - количество повторяющихся животных данного типа
+     * @return Map; ключ - тип животного, значение - список дубликатов
      */
     @Override
-    public Map<String, Integer> findAllDuplicates(List<Animal> animals) {
+    public Map<String, List<Animal>> findAllDuplicates(List<Animal> animals) {
         if (Objects.isNull(animals) || animals.isEmpty()) {
             return new HashMap<>();
         }
 
-        // save repetition counts of unique animals in additional map
-        Map<Animal, Integer> counts = new HashMap<>();
-        for (Animal animal : animals) {
-            addCount(counts, animal, 1);
+        Map<String, List<Animal>> result = new HashMap<>();
+
+        // Stream API
+
+        return result;
+    }
+
+    /**
+     * Вычисляет средний возраст в годах для животных из заданного списка.
+     * Результат выводит на экран в формате "Average age in years: &lt;Средний возраст&gt;"
+     *
+     * @param animals Заданный список животных
+     */
+    public void findAverageAge(List<Animal> animals) {
+        if (Objects.isNull(animals) || animals.isEmpty()) {
+            System.out.println("Average age in years: 0.0");
+            return;
         }
 
-        // print all duplicates in the same order as in the source array
-        for (Animal animal : animals) {
-            if (counts.get(animal) > 1) {
-                System.out.println(animal);
-            }
+        double averageAge = 0;
+
+        // Stream API
+
+        System.out.println("Average age in years: " + averageAge);
+    }
+
+    /**
+     * Возвращает список животных, возраст которых больше пяти лет, а стоимость -
+     * больше средней по исходному списку.
+     *
+     * @param animals Список животных
+     * @return список животных, отсортированный по возрастанию даты рождения
+     */
+    public List<Animal> findOldAndExpensive(List<Animal> animals) {
+        if (Objects.isNull(animals) || animals.isEmpty()) {
+            return new ArrayList<>();
         }
 
-        // get repetition counts for types of duplicated animals
-        Map<String, Integer> result = new HashMap<>();
-        counts.keySet().forEach(animal -> {
-            int count = counts.get(animal);
-            if (count > 1) {
-                String type = animal.getType().toString();
-                addCount(result, type, count);
-            }
-        });
+        ArrayList<Animal> result = new ArrayList<>();
+
+        // Stream API
+
+        return result;
+    }
+
+    /**
+     * Возвращает список имён не более трёх животных с самой низкой ценой.
+     *
+     * @param animals Список животных
+     * @return Список имён, отсортированный в обратном порядке
+     */
+    public List<String> findMinConstAnimals(List<Animal> animals) {
+        if (Objects.isNull(animals) || animals.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        ArrayList<String> result = new ArrayList<>();
+
+        // Stream API
 
         return result;
     }
