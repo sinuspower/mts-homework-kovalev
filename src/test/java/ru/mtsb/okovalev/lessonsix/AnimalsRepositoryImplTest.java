@@ -103,6 +103,21 @@ class AnimalsRepositoryImplTest {
     }
 
     @Test
+    @DisplayName("AnimalsRepositoryImpl.findOlderAnimals - duplicates in the input")
+    void findOlderAnimals_hasDuplicates() {
+        List<Animal> animals = new ArrayList<>(constantsCatSharkDogWolf);
+        animals.add(new Shark(Constants.SHARK));
+
+        Map<Animal, Integer> expected = new HashMap<>();
+        expected.put(Constants.SHARK, Constants.SHARK.getAgeYears());
+
+        assertEquals(
+                expected,
+                animalsRepositoryImpl.findOlderAnimals(animals, 20)
+        );
+    }
+
+    @Test
     @DisplayName("AnimalsRepositoryImpl.findOlderAnimals - normal")
     void findOlderAnimals() {
         Map<Animal, Integer> expected = new HashMap<>();
@@ -153,7 +168,11 @@ class AnimalsRepositoryImplTest {
         ArrayList<Animal> animals = new ArrayList<>(constantsCatSharkDogWolf);
         animals.add(shark);
 
-        assertEquals("{Shark=2}", animalsRepositoryImpl.findAllDuplicates(animals).toString());
+        assertEquals(
+                "{Shark=[{\"type\":\"Shark\",\"breed\":\"Bull shark\",\"character\":\"sentimental\",\"name\":\"Daisy\",\"birthdate\":\"20-04-1991\"}, " +
+                        "{\"type\":\"Shark\",\"breed\":\"Bull shark\",\"character\":\"sentimental\",\"name\":\"Daisy\",\"birthdate\":\"20-04-1991\"}]}",
+                animalsRepositoryImpl.findAllDuplicates(animals).toString()
+        );
         assertEquals(shark + System.lineSeparator() + shark, outputStreamCaptor.toString().trim());
     }
 }

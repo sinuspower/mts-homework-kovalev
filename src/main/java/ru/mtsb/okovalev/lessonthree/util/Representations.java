@@ -2,7 +2,6 @@ package ru.mtsb.okovalev.lessonthree.util;
 
 import ru.mtsb.okovalev.lessonthree.animals.Animal;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -20,7 +19,7 @@ public class Representations {
      * @param animals Массив, содержащий объекты Animal
      * @return компактный JSON, соответствующий исходному массиву
      */
-    public static String asJson_ArrayListAnimal(ArrayList<Animal> animals) {
+    public static String asJson_ListAnimal(List<Animal> animals) {
         if (Objects.isNull(animals) || animals.isEmpty()) {
             return "[]";
         }

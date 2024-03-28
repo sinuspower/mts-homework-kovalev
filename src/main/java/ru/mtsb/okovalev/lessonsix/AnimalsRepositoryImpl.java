@@ -39,7 +39,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
 
     /**
      * Возвращает всех животных, которые строго старше заданного возраста в годах.
-     * Если не найдено ни одного такого животного, то результат - первое самое старшее
+     * Если не найдено ни одного такого животного, то результат - самое старшее
      * животное, содержащееся во входящем массиве, и его возраст.
      *
      * @param animals       Массив животных
@@ -48,13 +48,27 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      */
     @Override
     public Map<Animal, Integer> findOlderAnimals(List<Animal> animals, int ageYearsBound) {
-        if (Objects.isNull(animals) || animals.isEmpty()) {
+        if (Objects.isNull(animals)) {
             return new HashMap<>();
         }
 
-        Map<Animal, Integer> result = new HashMap<>();
+        Map<Animal, Integer> result = animals
+                .stream()
+                .filter(a -> a.getAgeYears() > ageYearsBound)
+                .collect(
+                        Collectors.toMap(
+                                a -> a,
+                                Animal::getAgeYears,
+                                (b, c) -> b
+                        )
+                );
 
-        // Stream API
+        if (result.isEmpty()) {
+            animals
+                    .stream()
+                    .max(Comparator.comparing(Animal::getAgeYears))
+                    .ifPresent(a -> result.put(a, a.getAgeYears()));
+        }
 
         return result;
     }
@@ -69,15 +83,20 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      */
     @Override
     public Map<String, List<Animal>> findAllDuplicates(List<Animal> animals) {
-        if (Objects.isNull(animals) || animals.isEmpty()) {
+        if (Objects.isNull(animals)) {
             return new HashMap<>();
         }
 
-        Map<String, List<Animal>> result = new HashMap<>();
-
-        // Stream API
-
-        return result;
+        return animals
+                .stream()
+                .filter(a -> Collections.frequency(animals, a) > 1)
+                .peek(System.out::println)
+                .collect(
+                        Collectors.groupingBy(
+                                a -> a.getType().toString(),
+                                Collectors.toList()
+                        )
+                );
     }
 
     /**
@@ -92,11 +111,9 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
             return;
         }
 
-        double averageAge = 0;
-
-        // Stream API
-
-        System.out.println("Average age in years: " + averageAge);
+        System.out.println("Average age in years: " + animals
+                .stream()
+                .collect(Collectors.averagingDouble(Animal::getAgeYears)));
     }
 
     /**
@@ -111,36 +128,40 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
             return new ArrayList<>();
         }
 
-        ArrayList<Animal> result = new ArrayList<>();
+        double averageCost = animals
+                .stream()
+                .mapToDouble(Animal::getCost)
+                .average()
+                .orElse(0.0);
 
-        // Stream API
+        System.out.println("Average cost: " + averageCost);
 
-        return result;
+        return animals
+                .stream()
+                .filter(a -> a.getAgeYears() > 5)
+                .filter(a -> a.getCost() > averageCost)
+                .sorted(Comparator.comparing(Animal::getBirthdate))
+                .collect(Collectors.toList());
     }
 
     /**
      * Возвращает список имён не более трёх животных с самой низкой ценой.
+     * Животные, которые не могут иметь стоимости (наследники Predator), не рассматриваются.
      *
      * @param animals Список животных
      * @return Список имён, отсортированный в обратном порядке
      */
     public List<String> findMinConstAnimals(List<Animal> animals) {
-        if (Objects.isNull(animals) || animals.isEmpty()) {
+        if (Objects.isNull(animals)) {
             return new ArrayList<>();
         }
 
-        ArrayList<String> result = new ArrayList<>();
-
-        // Stream API
-
-        return result;
-    }
-
-    private <T> void addCount(Map<T, Integer> map, T key, Integer count) {
-        if (map.containsKey(key)) {
-            map.put(key, map.get(key) + count);
-        } else {
-            map.put(key, count);
-        }
+        return animals
+                .stream()
+                .filter(a -> a.getCost() > 0.0)
+                .sorted(Comparator.comparing(Animal::getCost))
+                .limit(3)
+                .map(Animal::getName)
+                .collect(Collectors.toList());
     }
 }
