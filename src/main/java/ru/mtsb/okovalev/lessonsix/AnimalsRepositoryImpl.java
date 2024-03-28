@@ -151,7 +151,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      * @param animals Список животных
      * @return Список имён, отсортированный в обратном порядке
      */
-    public List<String> findMinConstAnimals(List<Animal> animals) {
+    public List<String> findMinCostAnimals(List<Animal> animals) {
         if (Objects.isNull(animals)) {
             return new ArrayList<>();
         }

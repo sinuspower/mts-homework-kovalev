@@ -63,5 +63,5 @@ public interface AnimalsRepository {
      * @param animals Список животных
      * @return Список имён, отсортированный в обратном порядке
      */
-    List<String> findMinConstAnimals(List<Animal> animals);
+    List<String> findMinCostAnimals(List<Animal> animals);
 }

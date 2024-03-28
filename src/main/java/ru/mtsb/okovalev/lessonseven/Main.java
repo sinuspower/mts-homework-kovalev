@@ -42,6 +42,6 @@ public class Main {
         System.out.println(Representations.asJson_ListAnimal(oldAndExpensive));
 
         System.out.println("\n\tAnimalsRepositoryImpl.findMinConstAnimals(animalsList)\n" +
-                animalsRepositoryImpl.findMinConstAnimals(animalsList));
+                animalsRepositoryImpl.findMinCostAnimals(animalsList));
     }
 }
