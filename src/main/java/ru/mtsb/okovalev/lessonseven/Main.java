@@ -12,7 +12,7 @@ import java.util.Map;
 public class Main {
     public static void main(String[] args) {
         CreateAnimalsServiceImpl createAnimalsServiceImpl = new CreateAnimalsServiceImpl();
-        int n = 5;
+        int n = 3;
 
         ArrayList<Animal> animalsList = createAnimalsServiceImpl.create(n);
         System.out.println("\tanimalsList: " + n + " animals created by CreateAnimalsServiceImpl.create(" + n + ")");
@@ -23,7 +23,7 @@ public class Main {
                 animalsRepositoryImpl.findLeapYearNames(animalsList));
 
         System.out.println();
-        int ageYearsBound = 10;
+        int ageYearsBound = 15;
         System.out.println("\tAnimalsRepositoryImpl.findOlderAnimals(animalsList, " + ageYearsBound + ")\n" +
                 Representations.asJson_MapAnimalInteger(animalsRepositoryImpl.findOlderAnimals(animalsList, ageYearsBound)));
 

@@ -61,7 +61,7 @@ public interface AnimalsRepository {
      * Возвращает список имён не более трёх животных с самой низкой ценой.
      *
      * @param animals Список животных
-     * @return Список имён, отсортированный в обратном порядке
+     * @return список имён, отсортированный в обратном порядке
      */
     List<String> findMinCostAnimals(List<Animal> animals);
 }

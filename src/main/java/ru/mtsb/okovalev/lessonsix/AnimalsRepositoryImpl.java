@@ -134,8 +134,6 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
                 .average()
                 .orElse(0.0);
 
-        System.out.println("Average cost: " + averageCost);
-
         return animals
                 .stream()
                 .filter(a -> a.getAgeYears() > 5)
@@ -149,7 +147,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      * Животные, которые не могут иметь стоимости (наследники Predator), не рассматриваются.
      *
      * @param animals Список животных
-     * @return Список имён, отсортированный в обратном порядке
+     * @return список имён, отсортированный в обратном порядке
      */
     public List<String> findMinCostAnimals(List<Animal> animals) {
         if (Objects.isNull(animals)) {
@@ -162,6 +160,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
                 .sorted(Comparator.comparing(Animal::getCost))
                 .limit(3)
                 .map(Animal::getName)
+                .sorted((a, b) -> -a.compareTo(b))
                 .collect(Collectors.toList());
     }
 }

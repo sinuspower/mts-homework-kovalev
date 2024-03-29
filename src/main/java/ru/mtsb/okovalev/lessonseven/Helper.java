@@ -10,7 +10,15 @@ import ru.mtsb.okovalev.lessonthree.animals.enums.DogBreed;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Содержит вспомогательные методы, используемые в решениях нескольких заданий.
+ */
 public class Helper {
+    /**
+     * Возвращает список животных с дубликатами.
+     *
+     * @return список животных с дубликатами
+     */
     public static ArrayList<Animal> getAnimalsListWithDuplicates() {
         ArrayList<Animal> result = new CreateAnimalsServiceImpl().create(3);
 
