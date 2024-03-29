@@ -5,6 +5,7 @@ import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalType;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 /**
  * Домашнее животное – расширение базовой абстракции AbstractAnimal.
@@ -14,10 +15,13 @@ public abstract class Pet extends AbstractAnimal {
     protected double cost;
 
     /**
-     * Максимальная стоимость домашнего животного в USD.
-     * Может использоваться для генерации псевдослучайной стоимости.
+     * Создаёт "пустое" домашнее животное - указывается только тип.
+     *
+     * @param type Тип животного
      */
-    protected static final int COST_BOUND = 10000;
+    public Pet(AnimalType type) {
+        super(type);
+    }
 
     /**
      * Создаёт домашнее животное с указанными параметрами.
@@ -32,6 +36,16 @@ public abstract class Pet extends AbstractAnimal {
     public Pet(AnimalType type, String breed, String character, String name, LocalDate birthdate, double cost) {
         super(type, breed, character, name, birthdate);
         this.cost = cost;
+    }
+
+    /**
+     * Создаёт домашнее животное как копию другого домашнего животного.
+     *
+     * @param source Исходное домашнее животное для копирования.
+     */
+    public Pet(Pet source) {
+        super(source);
+        this.cost = source.cost;
     }
 
     /**
@@ -146,5 +160,19 @@ public abstract class Pet extends AbstractAnimal {
                 + "\"birthdate\":" + (this.birthdate == null ? "null," : "\"" + getBirthdateFormatted() + "\",")
                 + "\"cost\":\"" + new DecimalFormat("$#0.00").format(getCost()) + "\""
                 + "}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Pet)) return false;
+        if (!super.equals(o)) return false;
+        Pet pet = (Pet) o;
+        return Double.compare(getCost(), pet.getCost()) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getCost());
     }
 }

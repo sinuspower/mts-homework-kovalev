@@ -3,6 +3,9 @@ package ru.mtsb.okovalev.lessonthree;
 import ru.mtsb.okovalev.lessonthree.animals.Animal;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Имплементация интерфейса CreateAnimalsService.
@@ -24,12 +27,22 @@ public class CreateAnimalsServiceImpl implements CreateAnimalsService {
 
         int i = 0;
         do {
-            animals.add(randomAnimal());
+            animals.add(animalsFactory.getRandomAnimal());
             i++;
         } while (i < DEFAULT_ANIMALS_COUNT);
 
-        System.out.println("\t" + DEFAULT_ANIMALS_COUNT + " animals created by CreateAnimalsServiceImpl.create()");
         return animals;
+    }
+
+    /**
+     * Возвращает ассоциативный массив псевдослучайных животных,
+     * содержащий количество объектов по умолчанию.
+     *
+     * @return Map; ключ - тип животного, значение - список псевдослучайных животных этого типа
+     */
+    @Override
+    public Map<String, List<Animal>> createMap() {
+        return createMap(DEFAULT_ANIMALS_COUNT);
     }
 
     /**
@@ -45,10 +58,38 @@ public class CreateAnimalsServiceImpl implements CreateAnimalsService {
         ArrayList<Animal> animals = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
-            animals.add(randomAnimal());
+            animals.add(animalsFactory.getRandomAnimal());
         }
 
-        System.out.println("\t" + n + " animals created by CreateAnimalsServiceImpl.create(" + n + ")");
+        return animals;
+    }
+
+    /**
+     * Возвращает ассоциативный массив псевдослучайных животных,
+     * содержащий в общей сложности заданное количество объектов.
+     *
+     * @param n Количество животных, которых необходимо создать
+     * @return Map; ключ - тип животного, значение - список псевдослучайных животных этого типа
+     */
+    public Map<String, List<Animal>> createMap(int n) {
+        HashMap<String, List<Animal>> animals = new HashMap<>();
+
+        Animal animal;
+        ArrayList<Animal> animalsList;
+        String animalType;
+        for (int i = 0; i < n; i++) {
+            animal = animalsFactory.getRandomAnimal();
+            animalType = animal.getType().toString();
+
+            if (animals.containsKey(animalType)) {
+                animals.get(animalType).add(animal);
+            } else {
+                animalsList = new ArrayList<>();
+                animalsList.add(animal);
+                animals.put(animal.getType().toString(), animalsList);
+            }
+        }
+
         return animals;
     }
 }

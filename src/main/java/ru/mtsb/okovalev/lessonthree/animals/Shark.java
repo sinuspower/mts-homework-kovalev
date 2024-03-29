@@ -1,13 +1,8 @@
 package ru.mtsb.okovalev.lessonthree.animals;
 
-import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalCharacter;
-import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalName;
 import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalType;
-import ru.mtsb.okovalev.lessonthree.animals.enums.SharkBreed;
-import ru.mtsb.okovalev.lessonthree.util.RandomEnumValue;
 
 import java.time.LocalDate;
-import java.util.Random;
 
 /**
  * Акула.
@@ -16,14 +11,10 @@ public class Shark extends Predator {
     private static final AnimalType TYPE = AnimalType.SHARK;
 
     /**
-     * Создаёт акулу псевдослучайной породы с псевдослучайным характером.
+     * Создаёт "пустую" акулу.
      */
     public Shark() {
-        super(TYPE, new RandomEnumValue<>(SharkBreed.class).getString(),
-                new RandomEnumValue<>(AnimalCharacter.class).getString(),
-                new RandomEnumValue<>(AnimalName.class).getString(),
-                LocalDate.now().minusDays(new Random().nextInt(AbstractAnimal.BIRTHDATE_DAYS_BOUND))
-        );
+        super(TYPE);
     }
 
     /**
@@ -34,9 +25,17 @@ public class Shark extends Predator {
      * @param name      Кличка
      * @param birthdate Дата рождения
      */
-    @SuppressWarnings("unused")
     public Shark(String breed, String character, String name, LocalDate birthdate) {
         super(TYPE, breed, character, name, birthdate);
+    }
+
+    /**
+     * Создаёт акулу как копию другой акулы.
+     *
+     * @param source Исходная акула для копирования.
+     */
+    public Shark(Shark source) {
+        super(source);
     }
 
     /**
