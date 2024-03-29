@@ -111,13 +111,16 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
 
         // get repetition counts for types of duplicated animals
         Map<String, Integer> result = new HashMap<>();
-        counts.keySet().forEach(animal -> {
-            int count = counts.get(animal);
+        Iterator<Map.Entry<Animal, Integer>> iterator = counts.entrySet().iterator();
+        Animal animal;
+        int count;
+        while (iterator.hasNext()) {
+            animal = iterator.next().getKey();
+            count = counts.get(animal);
             if (count > 1) {
-                String type = animal.getType().toString();
-                addCount(result, type, count);
+                addCount(result, animal.getType().toString(), count);
             }
-        });
+        }
 
         return result;
     }
