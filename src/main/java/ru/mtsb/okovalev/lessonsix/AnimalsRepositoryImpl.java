@@ -58,8 +58,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
                 .collect(
                         Collectors.toMap(
                                 a -> a,
-                                Animal::getAgeYears,
-                                (b, c) -> b
+                                Animal::getAgeYears
                         )
                 );
 
@@ -77,6 +76,8 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      * Выводит на экран дубликаты животных и возвращает списки найденных дубликатов для каждого
      * типа животного из входящего массива. Находит все дубликаты, то есть для двух одинаковых животных
      * в исходном массиве выводит на экран и добавляет в результирующий список дубликатов их обоих.
+     * <p>
+     * Объекты a и b считаются дубликатами, когда a.toString() = b.toString().
      *
      * @param animals Массив животных
      * @return Map; ключ - тип животного, значение - список дубликатов
@@ -89,7 +90,10 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
 
         return animals
                 .stream()
-                .filter(a -> Collections.frequency(animals, a) > 1)
+                .filter(s -> Collections.frequency(animals
+                        .stream()
+                        .map(Animal::toString)
+                        .collect(Collectors.toList()), s.toString()) > 1)
                 .peek(System.out::println)
                 .collect(
                         Collectors.groupingBy(

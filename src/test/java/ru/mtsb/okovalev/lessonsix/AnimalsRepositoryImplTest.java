@@ -155,10 +155,11 @@ class AnimalsRepositoryImplTest {
 
         Map<Animal, Integer> expected = new HashMap<>();
         expected.put(Constants.SHARK, Constants.SHARK.getAgeYears());
+        expected.put(new Shark(Constants.SHARK), Constants.SHARK.getAgeYears());
 
         assertEquals(
-                expected,
-                animalsRepositoryImpl.findOlderAnimals(animals, 20)
+                expected.toString(),
+                animalsRepositoryImpl.findOlderAnimals(animals, 20).toString()
         );
     }
 
