@@ -26,17 +26,17 @@ public class Main {
         }.create();
         System.out.println("\t" + CreateAnimalsService.DEFAULT_ANIMALS_COUNT +
                 " animals created by CreateAnimalsService.create()");
-        System.out.println(Representations.asJson_ArrayListAnimal(byCreateAnimalsServiceCreate) + "\n");
+        System.out.println(Representations.asJson_ListAnimal(byCreateAnimalsServiceCreate) + "\n");
 
         ArrayList<Animal> byCreateAnimalsServiceImplCreate = createAnimalsServiceImpl.create();
         System.out.println("\t" + CreateAnimalsService.DEFAULT_ANIMALS_COUNT +
                 " animals created by CreateAnimalsServiceImpl.create()");
-        System.out.println(Representations.asJson_ArrayListAnimal(byCreateAnimalsServiceImplCreate) + "\n");
+        System.out.println(Representations.asJson_ListAnimal(byCreateAnimalsServiceImplCreate) + "\n");
 
         int n = 4;
         ArrayList<Animal> byCreateAnimalsServiceImplCreateN = createAnimalsServiceImpl.create(n);
         System.out.println("\t" + n + " animals created by CreateAnimalsServiceImpl.create(" + n + ")");
-        System.out.println(Representations.asJson_ArrayListAnimal(byCreateAnimalsServiceImplCreateN) + "\n");
+        System.out.println(Representations.asJson_ListAnimal(byCreateAnimalsServiceImplCreateN) + "\n");
 
         System.out.println("\tCat created by constructor without parameters");
         Animal cat = new Cat();

@@ -1,6 +1,6 @@
-package ru.mtsb.okovalev.lessonsix;
+package ru.mtsb.okovalev.lessonseven;
 
-import ru.mtsb.okovalev.lessonseven.Helper;
+import ru.mtsb.okovalev.lessonsix.AnimalsRepositoryImpl;
 import ru.mtsb.okovalev.lessonthree.CreateAnimalsServiceImpl;
 import ru.mtsb.okovalev.lessonthree.animals.Animal;
 import ru.mtsb.okovalev.lessonthree.util.Representations;
@@ -14,10 +14,6 @@ public class Main {
         CreateAnimalsServiceImpl createAnimalsServiceImpl = new CreateAnimalsServiceImpl();
         int n = 3;
 
-        Map<String, List<Animal>> animalsMap = createAnimalsServiceImpl.createMap(n);
-        System.out.println("\tanimalsMap: " + n + " animals created by CreateAnimalsServiceImpl.createMap(" + n + ")");
-        System.out.println(Representations.asJson_MapStringListAnimal(animalsMap) + "\n");
-
         ArrayList<Animal> animalsList = createAnimalsServiceImpl.create(n);
         System.out.println("\tanimalsList: " + n + " animals created by CreateAnimalsServiceImpl.create(" + n + ")");
         System.out.println(Representations.asJson_ListAnimal(animalsList) + "\n");
@@ -27,16 +23,25 @@ public class Main {
                 animalsRepositoryImpl.findLeapYearNames(animalsList));
 
         System.out.println();
-        int ageYearsBound = 10;
+        int ageYearsBound = 15;
         System.out.println("\tAnimalsRepositoryImpl.findOlderAnimals(animalsList, " + ageYearsBound + ")\n" +
                 Representations.asJson_MapAnimalInteger(animalsRepositoryImpl.findOlderAnimals(animalsList, ageYearsBound)));
 
         System.out.println();
         ArrayList<Animal> withDuplicates = Helper.getAnimalsListWithDuplicates();
         System.out.println("\twithDuplicates:\n" + Representations.asJson_ListAnimal(withDuplicates));
-        System.out.println("\tAnimalsRepositoryImpl.findAllDuplicates(withDuplicates)");
+        System.out.println("\tAnimalsRepositoryImpl.findDuplicates(withDuplicates)");
         Map<String, List<Animal>> duplicates = animalsRepositoryImpl.findAllDuplicates(withDuplicates);
-        System.out.println("\t" + duplicates);
-    }
+        System.out.println(Representations.asJson_MapStringListAnimal(duplicates));
 
+        System.out.println("\n\tAnimalsRepositoryImpl.findAverageAge(animalsList)");
+        animalsRepositoryImpl.findAverageAge(animalsList);
+
+        System.out.println("\n\tAnimalsRepositoryImpl.findOldAndExpensive(animalsList)");
+        List<Animal> oldAndExpensive = animalsRepositoryImpl.findOldAndExpensive(animalsList);
+        System.out.println(Representations.asJson_ListAnimal(oldAndExpensive));
+
+        System.out.println("\n\tAnimalsRepositoryImpl.findMinConstAnimals(animalsList)\n" +
+                animalsRepositoryImpl.findMinCostAnimals(animalsList));
+    }
 }

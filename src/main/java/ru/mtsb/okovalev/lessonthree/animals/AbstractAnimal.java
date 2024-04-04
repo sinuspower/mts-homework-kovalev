@@ -5,11 +5,13 @@ import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalType;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Базовая абстракция животного.
  */
 public abstract class AbstractAnimal implements Animal {
+    protected UUID uuid;
     protected AnimalType type;
     protected String breed;
     protected String character;
@@ -29,6 +31,7 @@ public abstract class AbstractAnimal implements Animal {
      * @param type Тип животного
      */
     public AbstractAnimal(AnimalType type) {
+        this.uuid = UUID.randomUUID();
         this.type = type;
     }
 
@@ -42,6 +45,7 @@ public abstract class AbstractAnimal implements Animal {
      * @param birthdate Дата рождения животного
      */
     public AbstractAnimal(AnimalType type, String breed, String character, String name, LocalDate birthdate) {
+        this.uuid = UUID.randomUUID();
         this.type = type;
         this.breed = breed;
         this.character = character;
@@ -55,11 +59,13 @@ public abstract class AbstractAnimal implements Animal {
      * @param source Исходный объект для копирования
      */
     public AbstractAnimal(AbstractAnimal source) {
+        this.uuid = UUID.randomUUID();
         this.type = source.type;
         this.breed = source.breed;
         this.character = source.character;
         this.name = source.name;
         this.birthdate = source.birthdate;
+        this.birthdateFormat = source.birthdateFormat;
     }
 
     /**
@@ -95,6 +101,7 @@ public abstract class AbstractAnimal implements Animal {
         if (!(o instanceof AbstractAnimal)) return false;
         AbstractAnimal that = (AbstractAnimal) o;
         return getType() == that.getType() &&
+                Objects.equals(this.uuid, that.uuid) &&
                 Objects.equals(getBreed(), that.getBreed()) &&
                 Objects.equals(getCharacter(), that.getCharacter()) &&
                 Objects.equals(getName(), that.getName()) &&
@@ -104,6 +111,7 @@ public abstract class AbstractAnimal implements Animal {
     @Override
     public int hashCode() {
         return Objects.hash(
+                uuid,
                 getType(),
                 getBreed(),
                 getCharacter(),

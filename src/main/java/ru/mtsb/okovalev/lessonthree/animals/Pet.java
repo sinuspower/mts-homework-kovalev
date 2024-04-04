@@ -99,6 +99,15 @@ public abstract class Pet extends AbstractAnimal {
     }
 
     /**
+     * Возвращает стоимость домашнего животного в USD.
+     *
+     * @return стоимость домашнего животного в USD
+     */
+    public double getCost() {
+        return cost;
+    }
+
+    /**
      * Возвращает формат даты рождения домашнего животного.
      *
      * @return формат строкового представления даты рождения домашнего животного
@@ -134,15 +143,6 @@ public abstract class Pet extends AbstractAnimal {
     public String getBirthdateFormatted() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(getBirthdateFormat());
         return super.birthdate.format(dtf);
-    }
-
-    /**
-     * Возвращает стоимость домашнего животного в USD.
-     *
-     * @return стоимость домашнего животного в USD
-     */
-    public double getCost() {
-        return cost;
     }
 
     /**

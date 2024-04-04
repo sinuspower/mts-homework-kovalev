@@ -27,7 +27,7 @@ public class AnimalsFactory {
     /**
      * Возвращает псевдослучайное животное псевдослучайного вида.
      *
-     * @return псевдослучаное животное
+     * @return псевдослучайное животное
      */
     public Animal getRandomAnimal() {
         return getRandomAnimal(AnimalType.getRandom());
@@ -37,7 +37,7 @@ public class AnimalsFactory {
      * Возвращает псевдослучайное животное указанного вида.
      *
      * @param type Тип животного, которое необходимо создать.
-     * @return псевдослучаное животное
+     * @return псевдослучайное животное
      */
     public Animal getRandomAnimal(AnimalType type) {
         if (Objects.isNull(type)) {
