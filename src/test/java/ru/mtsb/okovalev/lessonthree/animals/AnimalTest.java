@@ -22,7 +22,7 @@ class AnimalTest {
         @Override
         public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
             return Stream.of(
-                    Arguments.of(LocalDate.of(1991, 4, 20), 32),
+                    Arguments.of(LocalDate.of(1991, 4, 20), 33),
                     Arguments.of(LocalDate.of(2001, 3, 11), 23),
                     Arguments.of(LocalDate.of(2024, 3, 11), 0),
                     Arguments.of(LocalDate.of(1924, 3, 24), 100)
