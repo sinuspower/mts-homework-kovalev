@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -210,38 +211,15 @@ public class UtilTest {
     }
 
     @Test
-    @DisplayName("Util.factorial - N is less than 0")
-    void factorial_nIsLessThanZero() {
-        IllegalArgumentException thrown = assertThrows(
-                IllegalArgumentException.class,
-                () -> Util.factorial(-13)
-        );
-
-        assertEquals("Expected n in [0, 20]. Actual n = -13", thrown.getMessage());
-    }
-
-    @Test
-    @DisplayName("Util.factorial - N is greater than 20")
-    void factorial_nIsGreaterThanTwenty() {
-        IllegalArgumentException thrown = assertThrows(
-                IllegalArgumentException.class,
-                () -> Util.factorial(40)
-        );
-
-        assertEquals("Expected n in [0, 20]. Actual n = 40", thrown.getMessage());
-    }
-
-    @Test
     @DisplayName("Util.factorial - N = 0")
     void factorial_nEqualsZero() {
         assertDoesNotThrow(() -> Util.factorial(0));
-        assertEquals(1, Util.factorial(0));
+        assertEquals(new BigInteger("1"), Util.factorial(0));
     }
 
     @Test
-    @DisplayName("Util.factorial - N = 10")
-    void factorial_nEqualsTen() {
-        assertDoesNotThrow(() -> Util.factorial(10));
-        assertEquals(3628800, Util.factorial(10));
+    @DisplayName("Util.factorial - N = 100")
+    void factorial_nEqualsOneHundred() {
+        assertEquals(new BigInteger("93326215443944152681699238856266700490715968264381621468592963895217599993229915608941463976156518286253697920827223758251185210916864000000000000000000000000"), Util.factorial(100));
     }
 }

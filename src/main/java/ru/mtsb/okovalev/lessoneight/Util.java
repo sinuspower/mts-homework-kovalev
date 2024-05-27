@@ -1,5 +1,6 @@
 package ru.mtsb.okovalev.lessoneight;
 
+import java.math.BigInteger;
 import java.util.Objects;
 import java.util.Random;
 
@@ -41,35 +42,9 @@ public class Util {
      * @param array Массив целых чисел
      */
     public static void sort(int[] array) {
-        if (Objects.isNull(array)) {
-            return;
-        }
+        if (Objects.isNull(array)) return;
 
         quicksort(array, 0, array.length - 1);
-    }
-
-    /**
-     * Вычисляет факториал числа n.
-     *
-     * @param n Число [0, 20] – факториал 21 и далее больше максимального
-     *          значения типа Long = 9223372036854775807
-     * @return Факториал
-     * @throws IllegalArgumentException если n > 20 или n < 0
-     */
-    public static long factorial(long n) throws IllegalArgumentException {
-        if (n < 0 || n > 20) {
-            throw new IllegalArgumentException("Expected n in [0, 20]. Actual n = " + n);
-        }
-
-        if (n == 0) return 1;
-
-        long factorial = 1;
-
-        for (int i = 2; i <= n; i++) {
-            factorial *= i;
-        }
-
-        return factorial;
     }
 
     /**
@@ -148,5 +123,154 @@ public class Util {
         }
 
         return pivotIndex;
+    }
+
+    /**
+     * Вычисляет факториал числа n.
+     *
+     * @param n Число
+     * @return Факториал
+     */
+    public static BigInteger factorial(int n) {
+        BigInteger factorial = new BigInteger("1");
+        if (n == 0) return factorial;
+
+        for (int i = 2; i <= n; i++) {
+            factorial = factorial.multiply(new BigInteger(Integer.toString(i)));
+        }
+
+        return factorial;
+    }
+
+    /**
+     * Возвращает последовательность чисел Фибоначчи до указанного индекса n.
+     * Индексация начинается с нуля, поэтому длина результирующей последовательности = n + 1.
+     *
+     * @param n Индекс последнего элемента последовательности
+     * @return Последовательность из n + 1 числа Фибоначчи
+     */
+    public static BigInteger[] fibonacci(int n) {
+        if (n < 0) return null;
+
+        int startIndex = 0;
+        BigInteger[] result = new BigInteger[n + 1];
+        fibonacciSubsequence(result, startIndex, n);
+
+        return result;
+    }
+
+    /**
+     * Вычисляет подпоследовательность чисел Фибоначчи,
+     * начиная с указанного индекса и заканчивая указанным индексом.
+     *
+     * @param sequence   Массив для записи последовательности Фибоначчи
+     * @param startIndex Начальный индекс подпоследовательности
+     * @param endIndex   Конечный индекс подпоследовательности
+     */
+    private static void fibonacciSubsequence(BigInteger[] sequence, int startIndex, int endIndex) {
+        BigInteger prePrevious = new BigInteger("0");
+        BigInteger previous = new BigInteger("1");
+
+        if (startIndex < 2) {
+            startIndex = 2;
+            sequence[0] = new BigInteger("0");
+            sequence[1] = new BigInteger("1");
+        } else {
+            prePrevious = fibonacciNumber(startIndex - 2);
+            previous = fibonacciNumber(startIndex - 1);
+        }
+
+        for (int i = startIndex; i <= endIndex; i++) {
+            sequence[i] = prePrevious.add(previous);
+            prePrevious = new BigInteger(previous.toString());
+            previous = new BigInteger(sequence[i].toString());
+        }
+    }
+
+    /**
+     * Вычисляет n-е число Фибоначчи на основе алгоритма быстрого перемножения квадратных матриц.
+     *
+     * @param n Индекс искомого числа Фибоначчи
+     * @return N-е число Фибоначчи
+     */
+    private static BigInteger fibonacciNumber(int n) {
+        if (n == 0) return new BigInteger("0");
+        if (n < 3) return new BigInteger("1");
+
+        BigInteger[][] q = new BigInteger[][]{
+                {new BigInteger("1"), new BigInteger("1")},
+                {new BigInteger("1"), new BigInteger("0")}
+        };
+        BigInteger[][] matrix = new BigInteger[][]{
+                {new BigInteger("1"), new BigInteger("0")},
+                {new BigInteger("0"), new BigInteger("1")}
+        };
+
+        int[] degreesOfTwo = degreesOfTwo(n);
+
+        for (int degree : degreesOfTwo) {
+            matrix = matrixMul(matrix, quickMatrixPow(q, degree));
+        }
+
+        return matrix[0][1]; // = Fₙ
+    }
+
+    /**
+     * Возвращает массив чисел - степеней двойки, в сумму которых раскладывается заданное число.
+     *
+     * @param n Число
+     * @return Массив степеней двойки для данного числа
+     */
+    private static int[] degreesOfTwo(int n) {
+        String binaryString = Integer.toBinaryString(n);
+        int binDigitsCount = binaryString.length();
+
+        int onesCount = (int) binaryString.chars().filter(c -> c == '1').count();
+        int[] result = new int[onesCount];
+
+        int j = 0;
+        for (int i = 0; i < binDigitsCount; i++) {
+            int currentDegree = 1 << i;
+            if ((n & currentDegree) > 0) {
+                result[j++] = currentDegree;
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * Быстрое возведение квадратной матрицы в указанную степень.
+     *
+     * @param m Исходная матрица
+     * @param p Степень, в которую должна быть возведена матрица
+     * @return Матрица m в степени p
+     */
+    private static BigInteger[][] quickMatrixPow(BigInteger[][] m, int p) {
+        if (p == 1) return m;
+
+        BigInteger[][] halfPower = quickMatrixPow(m, p / 2);
+
+        return matrixMul(halfPower, halfPower);
+    }
+
+    /**
+     * Перемножает две матрицы 2*2.
+     *
+     * @param m1 Матрица 2*2
+     * @param m2 Матрица 2*2
+     * @return Произведение двух матриц 2*2
+     */
+    private static BigInteger[][] matrixMul(BigInteger[][] m1, BigInteger[][] m2) {
+        return new BigInteger[][]{
+                {
+                        m1[0][0].multiply(m2[0][0]).add(m1[0][1].multiply(m2[1][0])),
+                        m1[0][0].multiply(m2[0][1]).add(m1[0][1].multiply(m2[1][1]))
+                },
+                {
+                        m1[1][0].multiply(m2[0][0]).add(m1[1][1].multiply(m2[1][0])),
+                        m1[1][0].multiply(m2[0][1]).add(m1[1][1].multiply(m2[1][1]))
+                }
+        };
     }
 }

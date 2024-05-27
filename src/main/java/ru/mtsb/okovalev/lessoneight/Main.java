@@ -1,5 +1,6 @@
 package ru.mtsb.okovalev.lessoneight;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 
 public class Main {
@@ -19,19 +20,24 @@ public class Main {
             System.out.println(e.getMessage());
         }
 
-        try {
-            System.out.println("\n\tFactorial.");
+        System.out.println("\n\tFactorial.");
 
-            long n = 18;
-            long startNanoseconds = System.nanoTime();
-            long factorial = Util.factorial(n); // throws
-            long timeSpentNanoseconds = System.nanoTime() - startNanoseconds;
+        int n = 10000;
+        long startNanoseconds = System.nanoTime();
+        BigInteger factorial = Util.factorial(n);
+        long timeSpentNanoseconds = System.nanoTime() - startNanoseconds;
+        System.out.println("factorial(" + n + ") = " + factorial);
+        System.out.println("Time spent: " + timeSpentNanosecondsToString(timeSpentNanoseconds));
 
-            System.out.println("factorial(" + n + ") = " + factorial);
-            System.out.println("Time spent: " + timeSpentNanosecondsToString(timeSpentNanoseconds));
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
+        System.out.println("\n\tFibonacci.");
+        n = 11000;
+        startNanoseconds = System.nanoTime();
+        BigInteger[] fibonacci = Util.fibonacci(n);
+        timeSpentNanoseconds = System.nanoTime() - startNanoseconds;
+        BigInteger theLast = fibonacci != null ? fibonacci[n] : null;
+        System.out.println("f(" + n + ")\nThe last element: " + theLast);
+        System.out.println("Time spent: " +
+                timeSpentNanosecondsToString(timeSpentNanoseconds));
     }
 
     private static String timeSpentNanosecondsToString(long timeSpentNanoseconds) {
