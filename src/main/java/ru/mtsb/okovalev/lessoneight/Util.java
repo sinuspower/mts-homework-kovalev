@@ -1,14 +1,19 @@
 package ru.mtsb.okovalev.lessoneight;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Random;
+import java.util.concurrent.*;
 
 /**
  * Класс содержит набор статических методов, необходимых для решения задач в рамках задания.
  */
 public class Util {
     private static final Random RANDOM = new Random();
+    private static final int THREADS_COUNT = 8;
+    private static final int MIN_DATA_LENGTH = 3;
 
     /**
      * Генерирует массив псевдослучайных чисел.
@@ -37,7 +42,7 @@ public class Util {
 
     /**
      * Выполняет сортировку массива в порядке возрастания элементов посредством
-     * базовой реализации алгоритма быстрой сортировки.
+     * базовой реализации алгоритма быстрой сортировки. Изменяет содержимое исходного массива.
      *
      * @param array Массив целых чисел
      */
@@ -45,6 +50,71 @@ public class Util {
         if (Objects.isNull(array)) return;
 
         quicksort(array, 0, array.length - 1);
+    }
+
+    /**
+     * Выполняет сортировку массива в порядке возрастания элементов.
+     * Сортировка осуществляется в THREADS_COUNT параллельных потоках.
+     * Минимальное количество элементов массива для каждого
+     * потока исполнения = MIN_DATA_LENGTH. Изменяет исходный массив.
+     *
+     * @param array Массив целых чисел
+     * @throws InterruptedException если произошло исключение во время ожидания
+     *                              завершения всех потоков исполнения
+     */
+    @SuppressWarnings("ResultOfMethodCallIgnored") // executor.awaitTermination
+    public static void parallelSort(int[] array) throws InterruptedException {
+        if (Objects.isNull(array)) return;
+        if (array.length / THREADS_COUNT < MIN_DATA_LENGTH) sort(array); // sort in non-parallel
+
+        // start execution threads, do sorting
+        ExecutorService executor = Executors.newFixedThreadPool(THREADS_COUNT);
+
+        int sliceSize = array.length / THREADS_COUNT;
+        if (array.length % THREADS_COUNT != 0) sliceSize++;
+
+        for (int i = 0; i < THREADS_COUNT; i++) {
+            int startIndex = i * sliceSize;
+            int endIndex = Math.min(startIndex + sliceSize - 1, array.length - 1);
+
+            executor.execute(() -> quicksort(array, startIndex, endIndex));
+        }
+
+        // wait for all execution threads will be done
+        executor.shutdown();
+        executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+
+        // start collecting results
+        int[] tmp = new int[array.length]; // for merging of sorted sub-arrays
+        int[] indexes = new int[THREADS_COUNT]; // array of current pointers in sub-arrays
+
+        // init indexes in sorted sub-arrays
+        for (int i = 0; i < indexes.length; i++) {
+            indexes[i] = Math.min(i * sliceSize, array.length - 1);
+        }
+
+        int min, indexForInc;
+        for (int i = 0; i < tmp.length; i++) {
+            min = Integer.MAX_VALUE;
+            indexForInc = 0; // index of sub-array from which the minimum will be taken
+            for (int j = 0; j < indexes.length; j++) { // take minimum among the first elements of sub-arrays
+                if (indexes[j] != -1 && array[indexes[j]] < min) {
+                    min = array[indexes[j]];
+                    indexForInc = j;
+                }
+            }
+
+            tmp[i] = min;
+            // increase the index in sub-array if it isn't out of sub-array's bounds
+            if (indexes[indexForInc] < array.length - 1 && indexes[indexForInc] < indexForInc * sliceSize + sliceSize - 1) {
+                indexes[indexForInc]++;
+            } else { // out of bounds, all elements of this sub-array are in result
+                indexes[indexForInc] = -1; // do not use this index
+            }
+        }
+
+        // write fully sorted array to source
+        System.arraycopy(tmp, 0, array, 0, array.length);
     }
 
     /**
@@ -130,16 +200,82 @@ public class Util {
      *
      * @param n Число
      * @return Факториал
+     * @throws IllegalArgumentException если указан параметр n &lt; 0
      */
-    public static BigInteger factorial(int n) {
+    public static BigInteger factorial(int n) throws IllegalArgumentException {
+        if (n < 0) throw new IllegalArgumentException("Factorial of " + n + " is not defined");
+
         BigInteger factorial = new BigInteger("1");
         if (n == 0) return factorial;
 
-        for (int i = 2; i <= n; i++) {
-            factorial = factorial.multiply(new BigInteger(Integer.toString(i)));
+        return subfactorial(2, n);
+    }
+
+    /**
+     * Вычисляет факториал числа n. Для вычисления использует THREADS_COUNT параллельных потоков.
+     * Минимальная длина подпоследовательности натуральных чисел для каждого
+     * потока исполнения = MIN_DATA_LENGTH.
+     *
+     * @param n Число
+     * @return Факториал
+     * @throws IllegalArgumentException если указан параметр n &lt; 0
+     * @throws InterruptedException     если произошло исключение во время ожидания
+     *                                  завершения всех потоков исполнения
+     * @throws ExecutionException       если возникло исключение во время выполнения параллельной задачи (проброс исключения из Future.get())
+     */
+    @SuppressWarnings({"ResultOfMethodCallIgnored", "UnusedReturnValue"})
+    public static BigInteger parallelFactorial(int n) throws IllegalArgumentException, InterruptedException, ExecutionException {
+        if (n / THREADS_COUNT < MIN_DATA_LENGTH) return factorial(n); // get in non-parallel
+
+        // start execution threads, do calculation
+        ExecutorService executor = Executors.newFixedThreadPool(THREADS_COUNT);
+
+        BigInteger factorial = new BigInteger("1");
+        int step = n / THREADS_COUNT;
+
+        List<Future<BigInteger>> futures = new ArrayList<>(); // results will be here
+
+        int lastEnd = -1;
+        for (int i = 0; i < THREADS_COUNT; i++) {
+            int start = lastEnd + 1;
+            int end = Math.min(start + step, n);
+            lastEnd = end;
+
+            futures.add(
+                    CompletableFuture.supplyAsync(
+                            () -> Util.subfactorial(start, end), executor
+                    )
+            );
+        }
+
+        // wait for all execution threads will be done
+        executor.shutdown();
+        executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+
+        // get final result
+        for (Future<BigInteger> future : futures) {
+            factorial = factorial.multiply(future.get());
         }
 
         return factorial;
+    }
+
+    /**
+     * Вычисляет произведение последовательности натуральных чисел.
+     *
+     * @param start Начало последовательности
+     * @param end   Конец последовательности
+     * @return Произведение натуральных чисел от start до end
+     */
+    private static BigInteger subfactorial(int start, int end) {
+        if (start < 1) start = 1;
+        BigInteger result = new BigInteger("1");
+
+        for (int i = start; i <= end; i++) {
+            result = result.multiply(new BigInteger(Integer.toString(i)));
+        }
+
+        return result;
     }
 
     /**
@@ -148,13 +284,52 @@ public class Util {
      *
      * @param n Индекс последнего элемента последовательности
      * @return Последовательность из n + 1 числа Фибоначчи
+     * @throws IllegalArgumentException если указан параметр n &lt; 0
      */
-    public static BigInteger[] fibonacci(int n) {
-        if (n < 0) return null;
+    public static BigInteger[] fibonacci(int n) throws IllegalArgumentException {
+        if (n < 0) throw new IllegalArgumentException("N < 0 (" + n + ") has been specified");
 
         int startIndex = 0;
         BigInteger[] result = new BigInteger[n + 1];
         fibonacciSubsequence(result, startIndex, n);
+
+        return result;
+    }
+
+    /**
+     * Возвращает последовательность чисел Фибоначчи до указанного индекса n.
+     * Индексация начинается с нуля, поэтому длина результирующей последовательности = n + 1.
+     * Для генерации последовательности использует THREADS_COUNT параллельных потоков.
+     * Минимальная длина подпоследовательности для каждого потока исполнения = MIN_DATA_LENGTH.
+     *
+     * @param n Индекс последнего элемента последовательности
+     * @return Последовательность из n + 1 числа Фибоначчи
+     * @throws IllegalArgumentException если указан параметр n &lt; 0
+     * @throws InterruptedException     если произошло исключение во время ожидания
+     *                                  завершения всех потоков исполнения
+     */
+    @SuppressWarnings("ResultOfMethodCallIgnored") // executor.awaitTermination
+    public static BigInteger[] parallelFibonacci(int n) throws IllegalArgumentException, InterruptedException {
+        if (n / THREADS_COUNT < MIN_DATA_LENGTH) return fibonacci(n); // generate in non-parallel
+
+        // start execution threads, do generation
+        ExecutorService executor = Executors.newFixedThreadPool(THREADS_COUNT);
+
+        int sliceSize = n / THREADS_COUNT;
+        BigInteger[] result = new BigInteger[n + 1];
+
+        int lastEndIndex = -1;
+        for (int i = 0; i < THREADS_COUNT; i++) {
+            int startIndex = lastEndIndex + 1;
+            int endIndex = Math.min(startIndex + sliceSize, n);
+            lastEndIndex = endIndex;
+
+            executor.execute(() -> fibonacciSubsequence(result, startIndex, endIndex));
+        }
+
+        // wait for all execution threads will be done
+        executor.shutdown();
+        executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
 
         return result;
     }
@@ -168,6 +343,11 @@ public class Util {
      * @param endIndex   Конечный индекс подпоследовательности
      */
     private static void fibonacciSubsequence(BigInteger[] sequence, int startIndex, int endIndex) {
+        if (startIndex == endIndex) {
+            sequence[startIndex] = fibonacciNumber(startIndex);
+            return;
+        }
+
         BigInteger prePrevious = new BigInteger("0");
         BigInteger previous = new BigInteger("1");
 
