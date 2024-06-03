@@ -142,7 +142,7 @@ class AnimalsRepositoryImplTest {
     @DisplayName("AnimalsRepositoryImpl.findOlderAnimals - no one is older")
     void findOlderAnimals_noOlder() {
         assertEquals(
-                "{{\"type\":\"Shark\",\"breed\":\"Bull shark\",\"character\":\"sentimental\",\"name\":\"Daisy\",\"birthdate\":\"20-04-1991\"}=32}",
+                "{{\"type\":\"Shark\",\"breed\":\"Bull shark\",\"character\":\"sentimental\",\"name\":\"Daisy\",\"birthdate\":\"20-04-1991\"}=33}",
                 animalsRepositoryImpl.findOlderAnimals(constantsCatSharkDogWolf, 40).toString()
         );
     }
