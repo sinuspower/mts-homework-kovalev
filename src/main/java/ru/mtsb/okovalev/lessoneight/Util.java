@@ -14,6 +14,7 @@ public class Util {
     private static final Random RANDOM = new Random();
     private static final int THREADS_COUNT = 8;
     private static final int MIN_DATA_LENGTH = 3;
+    private static final int MAX_WAIT_MINUTES = 5;
 
     /**
      * Генерирует массив псевдослучайных чисел.
@@ -82,7 +83,7 @@ public class Util {
 
         // wait for all execution threads will be done
         executor.shutdown();
-        executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+        executor.awaitTermination(MAX_WAIT_MINUTES, TimeUnit.MINUTES);
 
         // start collecting results
         int[] tmp = new int[array.length]; // for merging of sorted sub-arrays
@@ -250,7 +251,7 @@ public class Util {
 
         // wait for all execution threads will be done
         executor.shutdown();
-        executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+        executor.awaitTermination(MAX_WAIT_MINUTES, TimeUnit.MINUTES);
 
         // get final result
         for (Future<BigInteger> future : futures) {
@@ -329,7 +330,7 @@ public class Util {
 
         // wait for all execution threads will be done
         executor.shutdown();
-        executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+        executor.awaitTermination(MAX_WAIT_MINUTES, TimeUnit.MINUTES);
 
         return result;
     }
