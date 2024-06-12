@@ -104,3 +104,8 @@
 [2024-06-12T22:09:05] CreateAnimalsServiceImpl.create(n) 00000002 {"type":"Wolf","breed":"Red wolf","character":"nervous","name":"Flower","birthdate":"01-05-2023"}
 [2024-06-12T22:09:05] CreateAnimalsServiceImpl.create(n) 00000003 {"type":"Dog","breed":"Akita","character":"passionate","name":"Cesar","birthdate":"10-12-2005","cost":"$117,20"}
 
+[2024-06-12T22:16:49] CreateAnimalsServiceImpl.create(n) 00000000 {"type":"Dog","breed":"Affenpinscher","character":"choleric","name":"Angel","birthdate":"30-08-2013","cost":"$4591,41"}
+[2024-06-12T22:16:49] CreateAnimalsServiceImpl.create(n) 00000001 {"type":"Cat","breed":"Cornish Rex","character":"nervous","name":"Daisy","birthdate":"12-07-2018","cost":"$2983,30"}
+[2024-06-12T22:16:49] CreateAnimalsServiceImpl.create(n) 00000002 {"type":"Dog","breed":"Bulldog","character":"apathetic","name":"Cesar","birthdate":"01-07-2012","cost":"$3449,74"}
+[2024-06-12T22:16:49] CreateAnimalsServiceImpl.create(n) 00000003 {"type":"Shark","breed":"Blacktip shark","character":"choleric","name":"Cuddles","birthdate":"08-04-2005"}
+

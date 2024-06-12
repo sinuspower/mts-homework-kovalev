@@ -34,7 +34,7 @@ public class CreateAnimalsServiceImpl implements CreateAnimalsService {
             i++;
         } while (i < DEFAULT_ANIMALS_COUNT);
 
-        writeLogFile(DEFAULT_LOG_FILE_PATH, "CreateAnimalsServiceImpl.create()", animals);
+        appendLogFile(DEFAULT_LOG_FILE_PATH, "CreateAnimalsServiceImpl.create()", animals);
 
         return animals;
     }
@@ -68,7 +68,7 @@ public class CreateAnimalsServiceImpl implements CreateAnimalsService {
             animals.add(animalsFactory.getRandomAnimal());
         }
 
-        writeLogFile(DEFAULT_LOG_FILE_PATH, "CreateAnimalsServiceImpl.create(n)", animals);
+        appendLogFile(DEFAULT_LOG_FILE_PATH, "CreateAnimalsServiceImpl.create(n)", animals);
 
         return animals;
     }

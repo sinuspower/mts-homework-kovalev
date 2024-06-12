@@ -50,20 +50,20 @@ public interface CreateAnimalsService {
             i++;
         }
 
-        writeLogFile(DEFAULT_LOG_FILE_PATH, "CreateAnimalsService.create()", animals);
+        appendLogFile(DEFAULT_LOG_FILE_PATH, "CreateAnimalsService.create()", animals);
 
         return animals;
     }
 
     /**
-     * Записывает список животных в файл по указанному пути.
+     * Записывает список животных в файл по указанному пути в режиме APPEND.
      *
      * @param path    Путь к файлу для записи
      * @param method  Вызывающий метод
      * @param animals Список животных
      * @throws IOException если произошло исключение во время записи файла
      */
-    default void writeLogFile(Path path, String method, ArrayList<Animal> animals) throws IOException {
+    default void appendLogFile(Path path, String method, ArrayList<Animal> animals) throws IOException {
         for (int i = 0; i < animals.size(); i++) {
             Animal animal = animals.get(i);
             appendLogFile(path, method, i, animal);
