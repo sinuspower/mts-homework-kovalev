@@ -5,6 +5,7 @@ import ru.mtsb.okovalev.lessonthree.CreateAnimalsServiceImpl;
 import ru.mtsb.okovalev.lessonthree.animals.Animal;
 import ru.mtsb.okovalev.lessonthree.util.Representations;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -14,29 +15,33 @@ public class Main {
         CreateAnimalsServiceImpl createAnimalsServiceImpl = new CreateAnimalsServiceImpl();
         int n = 3;
 
-        Map<String, List<Animal>> animalsMap = createAnimalsServiceImpl.createMap(n);
-        System.out.println("\tanimalsMap: " + n + " animals created by CreateAnimalsServiceImpl.createMap(" + n + ")");
-        System.out.println(Representations.asJson_MapStringListAnimal(animalsMap) + "\n");
+        try {
+            Map<String, List<Animal>> animalsMap = createAnimalsServiceImpl.createMap(n);
+            System.out.println("\tanimalsMap: " + n + " animals created by CreateAnimalsServiceImpl.createMap(" + n + ")");
+            System.out.println(Representations.asJson_MapStringListAnimal(animalsMap) + "\n");
 
-        ArrayList<Animal> animalsList = createAnimalsServiceImpl.create(n);
-        System.out.println("\tanimalsList: " + n + " animals created by CreateAnimalsServiceImpl.create(" + n + ")");
-        System.out.println(Representations.asJson_ListAnimal(animalsList) + "\n");
+            ArrayList<Animal> animalsList = createAnimalsServiceImpl.create(n);
+            System.out.println("\tanimalsList: " + n + " animals created by CreateAnimalsServiceImpl.create(" + n + ")");
+            System.out.println(Representations.asJson_ListAnimal(animalsList) + "\n");
 
-        AnimalsRepositoryImpl animalsRepositoryImpl = new AnimalsRepositoryImpl();
-        System.out.println("\tAnimalsRepositoryImpl.findLeapYearNames(animalsList)\n" +
-                animalsRepositoryImpl.findLeapYearNames(animalsList));
+            AnimalsRepositoryImpl animalsRepositoryImpl = new AnimalsRepositoryImpl();
+            System.out.println("\tAnimalsRepositoryImpl.findLeapYearNames(animalsList)\n" +
+                    animalsRepositoryImpl.findLeapYearNames(animalsList));
 
-        System.out.println();
-        int ageYearsBound = 10;
-        System.out.println("\tAnimalsRepositoryImpl.findOlderAnimals(animalsList, " + ageYearsBound + ")\n" +
-                Representations.asJson_MapAnimalInteger(animalsRepositoryImpl.findOlderAnimals(animalsList, ageYearsBound)));
+            System.out.println();
+            int ageYearsBound = 10;
+            System.out.println("\tAnimalsRepositoryImpl.findOlderAnimals(animalsList, " + ageYearsBound + ")\n" +
+                    Representations.asJson_MapAnimalInteger(animalsRepositoryImpl.findOlderAnimals(animalsList, ageYearsBound)));
 
-        System.out.println();
-        ArrayList<Animal> withDuplicates = Helper.getAnimalsListWithDuplicates();
-        System.out.println("\twithDuplicates:\n" + Representations.asJson_ListAnimal(withDuplicates));
-        System.out.println("\tAnimalsRepositoryImpl.findAllDuplicates(withDuplicates)");
-        Map<String, List<Animal>> duplicates = animalsRepositoryImpl.findAllDuplicates(withDuplicates);
-        System.out.println("\t" + duplicates);
+            System.out.println();
+            ArrayList<Animal> withDuplicates = Helper.getAnimalsListWithDuplicates();
+            System.out.println("\twithDuplicates:\n" + Representations.asJson_ListAnimal(withDuplicates));
+            System.out.println("\tAnimalsRepositoryImpl.findAllDuplicates(withDuplicates)");
+            Map<String, List<Animal>> duplicates = animalsRepositoryImpl.findAllDuplicates(withDuplicates);
+            System.out.println("\t" + duplicates);
+        } catch (IOException e) {
+            System.out.println("Can not write file: " + e.getMessage());
+        }
     }
 
 }

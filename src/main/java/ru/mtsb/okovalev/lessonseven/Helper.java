@@ -7,6 +7,7 @@ import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalCharacter;
 import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalName;
 import ru.mtsb.okovalev.lessonthree.animals.enums.DogBreed;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -19,7 +20,7 @@ public class Helper {
      *
      * @return список животных с дубликатами
      */
-    public static ArrayList<Animal> getAnimalsListWithDuplicates() {
+    public static ArrayList<Animal> getAnimalsListWithDuplicates() throws IOException {
         ArrayList<Animal> result = new CreateAnimalsServiceImpl().create(3);
 
         result.add(new Dog(

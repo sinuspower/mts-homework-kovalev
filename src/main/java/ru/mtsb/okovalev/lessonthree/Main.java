@@ -9,6 +9,7 @@ import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalName;
 import ru.mtsb.okovalev.lessonthree.animals.enums.DogBreed;
 import ru.mtsb.okovalev.lessonthree.util.Representations;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,25 +19,30 @@ public class Main {
     @SuppressWarnings("all")
     public static void main(String[] args) {
         CreateAnimalsServiceImpl createAnimalsServiceImpl = new CreateAnimalsServiceImpl();
-        ArrayList<Animal> byCreateAnimalsServiceCreate = new CreateAnimalsService() {
-            @Override
-            public Map<String, List<Animal>> createMap() {
-                return null;
-            }
-        }.create();
-        System.out.println("\t" + CreateAnimalsService.DEFAULT_ANIMALS_COUNT +
-                " animals created by CreateAnimalsService.create()");
-        System.out.println(Representations.asJson_ListAnimal(byCreateAnimalsServiceCreate) + "\n");
+        try {
+            ArrayList<Animal> byCreateAnimalsServiceCreate = new CreateAnimalsService() {
+                @Override
+                public Map<String, List<Animal>> createMap() {
+                    return null;
+                }
+            }.create();
 
-        ArrayList<Animal> byCreateAnimalsServiceImplCreate = createAnimalsServiceImpl.create();
-        System.out.println("\t" + CreateAnimalsService.DEFAULT_ANIMALS_COUNT +
-                " animals created by CreateAnimalsServiceImpl.create()");
-        System.out.println(Representations.asJson_ListAnimal(byCreateAnimalsServiceImplCreate) + "\n");
+            System.out.println("\t" + CreateAnimalsService.DEFAULT_ANIMALS_COUNT +
+                    " animals created by CreateAnimalsService.create()");
+            System.out.println(Representations.asJson_ListAnimal(byCreateAnimalsServiceCreate) + "\n");
 
-        int n = 4;
-        ArrayList<Animal> byCreateAnimalsServiceImplCreateN = createAnimalsServiceImpl.create(n);
-        System.out.println("\t" + n + " animals created by CreateAnimalsServiceImpl.create(" + n + ")");
-        System.out.println(Representations.asJson_ListAnimal(byCreateAnimalsServiceImplCreateN) + "\n");
+            ArrayList<Animal> byCreateAnimalsServiceImplCreate = createAnimalsServiceImpl.create();
+            System.out.println("\t" + CreateAnimalsService.DEFAULT_ANIMALS_COUNT +
+                    " animals created by CreateAnimalsServiceImpl.create()");
+            System.out.println(Representations.asJson_ListAnimal(byCreateAnimalsServiceImplCreate) + "\n");
+
+            int n = 4;
+            ArrayList<Animal> byCreateAnimalsServiceImplCreateN = createAnimalsServiceImpl.create(n);
+            System.out.println("\t" + n + " animals created by CreateAnimalsServiceImpl.create(" + n + ")");
+            System.out.println(Representations.asJson_ListAnimal(byCreateAnimalsServiceImplCreateN) + "\n");
+        } catch (IOException e) {
+            System.out.println("Can not write file: " + e.getMessage());
+        }
 
         System.out.println("\tCat created by constructor without parameters");
         Animal cat = new Cat();
