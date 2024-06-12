@@ -5,7 +5,6 @@ import ru.mtsb.okovalev.lessonthree.animals.Animal;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -25,7 +24,7 @@ public interface CreateAnimalsService {
     /**
      * Путь по умолчанию к файлу с логом создания животных.
      */
-    String DEFAULT_LOG_FILE_PATH = "resources/animals/logData.txt";
+    Path DEFAULT_LOG_FILE_PATH = Path.of("resources/animals/logData.txt");
 
     /**
      * Формат даты-времени для лог-файла.
@@ -51,7 +50,7 @@ public interface CreateAnimalsService {
             i++;
         }
 
-        writeLogFile(Paths.get(DEFAULT_LOG_FILE_PATH), "CreateAnimalsService.create()", animals);
+        writeLogFile(DEFAULT_LOG_FILE_PATH, "CreateAnimalsService.create()", animals);
 
         return animals;
     }

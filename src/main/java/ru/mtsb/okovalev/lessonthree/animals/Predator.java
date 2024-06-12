@@ -92,6 +92,16 @@ public abstract class Predator extends AbstractAnimal {
     }
 
     /**
+     * Возвращает секретную информацию.
+     *
+     * @return секретная информация
+     */
+    @Override
+    public String getSecretInformation() {
+        return super.secretInformation;
+    }
+
+    /**
      * Возвращает формат даты рождения дикого хищника.
      *
      * @return формат строкового представления даты рождения дикого хищника

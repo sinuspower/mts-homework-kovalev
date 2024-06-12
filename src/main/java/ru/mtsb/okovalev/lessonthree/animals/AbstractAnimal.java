@@ -1,10 +1,14 @@
 package ru.mtsb.okovalev.lessonthree.animals;
 
+import ru.mtsb.okovalev.lessonnine.util.SecretInformationCache;
 import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalType;
 
+import java.io.IOException;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Objects;
+import java.util.Random;
 import java.util.UUID;
 
 /**
@@ -18,6 +22,25 @@ public abstract class AbstractAnimal implements Animal {
     protected String name;
     protected LocalDate birthdate;
     protected String birthdateFormat = BIRTHDATE_FORMAT_DEFAULT;
+    protected String secretInformation;
+
+    /**
+     * Путь к файлу с секретной информацией.
+     */
+    public static final Path SECRET_INFO_FILE_PATH = Path.of("resources/secretStore/secretInformation.txt");
+
+    /**
+     * Кеш секретной информации для предотвращения слишком частого обращения к файлу.
+     */
+    public static final SecretInformationCache SECRET_INFO_CACHE = new SecretInformationCache();
+
+    static {
+        try {
+            SECRET_INFO_CACHE.init(SECRET_INFO_FILE_PATH);
+        } catch (IOException e) {
+            throw new RuntimeException("Can not initialize secret information cache: " + e.getMessage());
+        }
+    }
 
     /**
      * Паттерн форматирования даты рождения по умолчанию.
@@ -33,6 +56,7 @@ public abstract class AbstractAnimal implements Animal {
     public AbstractAnimal(AnimalType type) {
         this.uuid = UUID.randomUUID();
         this.type = type;
+        this.secretInformation = getRandomSecretStringFromCache();
     }
 
     /**
@@ -51,6 +75,12 @@ public abstract class AbstractAnimal implements Animal {
         this.character = character;
         this.name = name;
         this.birthdate = birthdate;
+        this.secretInformation = getRandomSecretStringFromCache();
+    }
+
+    private String getRandomSecretStringFromCache() {
+        var random = new Random();
+        return SECRET_INFO_CACHE.get(random.nextInt(SECRET_INFO_CACHE.size()));
     }
 
     /**
@@ -66,6 +96,7 @@ public abstract class AbstractAnimal implements Animal {
         this.name = source.name;
         this.birthdate = source.birthdate;
         this.birthdateFormat = source.birthdateFormat;
+        this.secretInformation = source.secretInformation;
     }
 
     /**

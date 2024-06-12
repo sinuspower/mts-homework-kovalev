@@ -37,6 +37,13 @@ public interface Animal {
     String getName();
 
     /**
+     * Возвращает секретную информацию.
+     *
+     * @return секретная информация
+     */
+    String getSecretInformation();
+
+    /**
      * Возвращает дату рождения животного.
      *
      * @return дата рождения животного

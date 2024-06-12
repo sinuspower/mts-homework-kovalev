@@ -99,6 +99,16 @@ public abstract class Pet extends AbstractAnimal {
     }
 
     /**
+     * Возвращает секретную информацию.
+     *
+     * @return секретная информация
+     */
+    @Override
+    public String getSecretInformation() {
+        return super.secretInformation;
+    }
+
+    /**
      * Возвращает стоимость домашнего животного в USD.
      *
      * @return стоимость домашнего животного в USD
