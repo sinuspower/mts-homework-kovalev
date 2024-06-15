@@ -68,8 +68,6 @@ public interface CreateAnimalsService {
             Animal animal = animals.get(i);
             appendLogFile(path, method, i, animal);
         }
-
-        Files.writeString(path, "\n", StandardOpenOption.APPEND);
     }
 
     /**

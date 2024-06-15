@@ -1,5 +1,6 @@
 package ru.mtsb.okovalev.lessonnine;
 
+import ru.mtsb.okovalev.lessonsix.AnimalsRepositoryImpl;
 import ru.mtsb.okovalev.lessonthree.CreateAnimalsServiceImpl;
 import ru.mtsb.okovalev.lessonthree.animals.AbstractAnimal;
 import ru.mtsb.okovalev.lessonthree.animals.Animal;
@@ -24,8 +25,14 @@ public class Main {
             createSecretInformationFile();
 
             ArrayList<Animal> animals = createAnimalsServiceImpl.create(n);
-            System.out.println("\t" + n + " animals created by CreateAnimalsServiceImpl.create(" + n + ")");
+            System.out.println("\tanimals: " + n + " animals created by CreateAnimalsServiceImpl.create(" + n + ")");
             System.out.println(Representations.asJson_ListAnimal(animals) + "\n");
+
+            AnimalsRepositoryImpl animalsRepositoryImpl = new AnimalsRepositoryImpl();
+            int ageYearsBound = 10;
+            System.out.println("\tAnimalsRepositoryImpl.findOlderAnimals(animals, " + ageYearsBound + ")\n" +
+                    Representations.asJson_MapAnimalInteger(animalsRepositoryImpl.findOlderAnimals(animals, ageYearsBound)));
+            System.out.println("\tFile: " + AnimalsRepositoryImpl.DEFAULT_FIND_OLDER_ANIMALS_FILE_PATH);
         } catch (IOException e) {
             System.out.println("Can not write file: " + e.getMessage());
         }

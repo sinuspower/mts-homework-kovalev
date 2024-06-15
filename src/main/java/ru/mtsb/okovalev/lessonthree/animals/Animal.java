@@ -1,5 +1,6 @@
 package ru.mtsb.okovalev.lessonthree.animals;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalType;
 
 import java.time.LocalDate;
@@ -56,6 +57,7 @@ public interface Animal {
      *
      * @return нулевая стоимость животного в USD
      */
+    @JsonInclude(JsonInclude.Include.NON_DEFAULT)
     default double getCost() {
         return 0.0;
     }

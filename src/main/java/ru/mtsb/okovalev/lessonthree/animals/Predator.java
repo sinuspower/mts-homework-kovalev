@@ -1,5 +1,6 @@
 package ru.mtsb.okovalev.lessonthree.animals;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalType;
 
 import java.time.LocalDate;
@@ -92,16 +93,6 @@ public abstract class Predator extends AbstractAnimal {
     }
 
     /**
-     * Возвращает секретную информацию.
-     *
-     * @return секретная информация
-     */
-    @Override
-    public String getSecretInformation() {
-        return super.secretInformation;
-    }
-
-    /**
      * Возвращает формат даты рождения дикого хищника.
      *
      * @return формат строкового представления даты рождения дикого хищника
@@ -134,6 +125,7 @@ public abstract class Predator extends AbstractAnimal {
      * @return дата рождения дикого хищника в формате this.birthdateFormat
      */
     @Override
+    @JsonIgnore
     public String getBirthdateFormatted() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(getBirthdateFormat());
         return super.birthdate.format(dtf);

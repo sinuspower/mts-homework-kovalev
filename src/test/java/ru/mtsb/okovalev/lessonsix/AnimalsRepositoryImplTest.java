@@ -19,6 +19,7 @@ import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalName;
 import ru.mtsb.okovalev.lessonthree.animals.enums.CatBreed;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.time.LocalDate;
 import java.util.*;
@@ -122,7 +123,7 @@ class AnimalsRepositoryImplTest {
     @ParameterizedTest(name = "List<Animal> is {0}")
     @NullSource
     @DisplayName("AnimalsRepositoryImpl.findOlderAnimals - list is null")
-    void findOlderAnimals_null(List<Animal> animals) {
+    void findOlderAnimals_null(List<Animal> animals) throws IOException {
         assertEquals(
                 Constants.EMPTY_MAP_STRING,
                 animalsRepositoryImpl.findOlderAnimals(animals, 18).toString()
@@ -131,7 +132,7 @@ class AnimalsRepositoryImplTest {
 
     @Test
     @DisplayName("AnimalsRepositoryImpl.findOlderAnimals - list is empty")
-    void findOlderAnimals_empty() {
+    void findOlderAnimals_empty() throws IOException {
         assertEquals(
                 Constants.EMPTY_MAP_STRING,
                 animalsRepositoryImpl.findOlderAnimals(new ArrayList<>(), 18).toString()
@@ -140,7 +141,7 @@ class AnimalsRepositoryImplTest {
 
     @Test
     @DisplayName("AnimalsRepositoryImpl.findOlderAnimals - no one is older")
-    void findOlderAnimals_noOlder() {
+    void findOlderAnimals_noOlder() throws IOException {
         assertEquals(
                 "{{\"type\":\"Shark\",\"breed\":\"Bull shark\",\"character\":\"sentimental\",\"name\":\"Daisy\",\"birthdate\":\"20-04-1991\"}=33}",
                 animalsRepositoryImpl.findOlderAnimals(constantsCatSharkDogWolf, 40).toString()
@@ -149,7 +150,7 @@ class AnimalsRepositoryImplTest {
 
     @Test
     @DisplayName("AnimalsRepositoryImpl.findOlderAnimals - duplicates in the input")
-    void findOlderAnimals_hasDuplicates() {
+    void findOlderAnimals_hasDuplicates() throws IOException {
         List<Animal> animals = new ArrayList<>(constantsCatSharkDogWolf);
         animals.add(new Shark(Constants.SHARK));
 
@@ -165,7 +166,7 @@ class AnimalsRepositoryImplTest {
 
     @Test
     @DisplayName("AnimalsRepositoryImpl.findOlderAnimals - normal")
-    void findOlderAnimals() {
+    void findOlderAnimals() throws IOException {
         Map<Animal, Integer> expected = new HashMap<>();
         expected.put(Constants.CAT, Constants.CAT.getAgeYears());
         expected.put(Constants.SHARK, Constants.SHARK.getAgeYears());
@@ -175,7 +176,7 @@ class AnimalsRepositoryImplTest {
                 animalsRepositoryImpl.findOlderAnimals(constantsCatSharkDogWolf, 10)
         );
     }
-
+    
     @ParameterizedTest(name = "List<Animal> is {0}")
     @NullSource
     @DisplayName("AnimalsRepositoryImpl.findAllDuplicates - list is null")
