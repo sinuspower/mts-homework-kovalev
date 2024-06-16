@@ -34,6 +34,7 @@ public class ResultReaderTest {
     @AfterEach
     void cleanup() throws IOException {
         Files.deleteIfExists(testCreateAnimalsLogFilePath);
+        Files.deleteIfExists(testFindOlderAnimalsJsonFilePath);
     }
 
     @Test
