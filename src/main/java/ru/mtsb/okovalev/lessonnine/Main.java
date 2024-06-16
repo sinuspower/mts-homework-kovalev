@@ -20,6 +20,16 @@ public class Main {
 
     public static void main(String[] args) {
         var createAnimalsServiceImpl = new CreateAnimalsServiceImpl();
+        createAnimalsServiceImpl.setCreateAnimalsLogFilePath(CreateAnimalsServiceImpl.DEFAULT_CREATE_ANIMALS_LOG_FILE_PATH);
+
+        var animalsRepositoryImpl = new AnimalsRepositoryImpl();
+        animalsRepositoryImpl.setFindOlderAnimalsJsonFilePath(AnimalsRepositoryImpl.DEFAULT_FIND_OLDER_ANIMALS_JSON_FILE_PATH);
+
+        var resultReader = new ResultReader(
+                createAnimalsServiceImpl.getCreateAnimalsLogFilePath(),
+                animalsRepositoryImpl.getFindOlderAnimalsJsonFilePath()
+        );
+
         int n = 5;
         String exceptionIn = "";
 
@@ -29,19 +39,18 @@ public class Main {
             ArrayList<Animal> animals = createAnimalsServiceImpl.create(n);
             System.out.println("\tanimals: " + n + " animals created by CreateAnimalsServiceImpl.create(" + n + ")");
             System.out.println(Representations.asJson_ListAnimal(animals));
-            System.out.println("\tLog file appended: " + CreateAnimalsServiceImpl.DEFAULT_CREATE_ANIMALS_LOG_FILE_PATH);
-            System.out.println("\tLog file lines count: " + ResultReader.createAnimalsLogFileLinesCount() + "\n");
+            System.out.println("\tLog file appended: " + createAnimalsServiceImpl.getCreateAnimalsLogFilePath());
+            System.out.println("\tLog file lines count: " + resultReader.createAnimalsLogFileLinesCount() + "\n");
 
-            AnimalsRepositoryImpl animalsRepositoryImpl = new AnimalsRepositoryImpl();
             int ageYearsBound = 10;
             exceptionIn = "Exception in AnimalsRepositoryImpl.findOlderAnimals";
             System.out.println("\tAnimalsRepositoryImpl.findOlderAnimals(animals, " + ageYearsBound + ")\n\tResult:\n" +
                     Representations.asJson_MapAnimalInteger(animalsRepositoryImpl.findOlderAnimals(animals, ageYearsBound)));
-            System.out.println("\tOutput file: " + AnimalsRepositoryImpl.DEFAULT_FIND_OLDER_ANIMALS_JSON_FILE_PATH);
+            System.out.println("\tOutput file: " + animalsRepositoryImpl.getFindOlderAnimalsJsonFilePath());
 
             exceptionIn = "Exception in ResultReader.readFindOlderAnimalsJsonFile";
             System.out.println("\tAnimals from file:\n" +
-                    Representations.asJson_ListAnimal(ResultReader.readFindOlderAnimalsJsonFile()) + "\n");
+                    Representations.asJson_ListAnimal(resultReader.readFindOlderAnimalsJsonFile()) + "\n");
         } catch (IOException e) {
             System.out.println(exceptionIn + ": " + e.getMessage());
         }

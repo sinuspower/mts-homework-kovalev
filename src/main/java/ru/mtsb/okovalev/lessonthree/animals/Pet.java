@@ -160,8 +160,7 @@ public abstract class Pet extends AbstractAnimal {
                 + "\"character\":" + (this.character == null ? "null," : "\"" + getCharacter() + "\",")
                 + "\"name\":" + (this.name == null ? "null," : "\"" + getName() + "\",")
                 + "\"birthdate\":" + (this.birthdate == null ? "null," : "\"" + getBirthdateFormatted() + "\",")
-                + "\"cost\":\"" + new DecimalFormat("$#0.00").format(getCost()) + "\","
-                + "\"secretInformation\":" + (this.secretInformation == null ? "null," : "\"" + getSecretInformation() + "\"")
+                + "\"cost\":\"" + new DecimalFormat("$#0.00").format(getCost()) + "\""
                 + "}";
     }
 

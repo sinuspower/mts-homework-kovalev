@@ -3,6 +3,7 @@ package ru.mtsb.okovalev.lessonthree;
 import ru.mtsb.okovalev.lessonthree.animals.Animal;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +15,36 @@ import java.util.Map;
  * Добавляет собственный метод create(n) для создания n псевдослучайных животных.
  */
 public class CreateAnimalsServiceImpl implements CreateAnimalsService {
+    /**
+     * Путь к log-файлу создаваемых животных.
+     */
+    private Path createAnimalsLogFilePath;
+
+    /**
+     * Задаёт значение по умолчанию пути к log-файлу создаваемых животных.
+     */
+    public CreateAnimalsServiceImpl() {
+        this.createAnimalsLogFilePath = DEFAULT_CREATE_ANIMALS_LOG_FILE_PATH;
+    }
+
+    /**
+     * Возвращает путь к log-файлу создаваемых животных.
+     *
+     * @return Текущий путь к файлу
+     */
+    public Path getCreateAnimalsLogFilePath() {
+        return createAnimalsLogFilePath;
+    }
+
+    /**
+     * Устанавливает новое значение пути к log-файлу создаваемых животных.
+     *
+     * @param path Новый путь к файлу
+     */
+    public void setCreateAnimalsLogFilePath(Path path) {
+        this.createAnimalsLogFilePath = path;
+    }
+
     /**
      * Возвращает массив псевдослучайных животных размера по умолчанию.
      * Для заполнения массива используется цикл do-while.
@@ -32,7 +63,7 @@ public class CreateAnimalsServiceImpl implements CreateAnimalsService {
             i++;
         } while (i < DEFAULT_ANIMALS_COUNT);
 
-        appendLogFile(DEFAULT_CREATE_ANIMALS_LOG_FILE_PATH, "CreateAnimalsServiceImpl.create()", animals);
+        appendLogFile(createAnimalsLogFilePath, "CreateAnimalsServiceImpl.create()", animals);
 
         return animals;
     }
@@ -66,7 +97,7 @@ public class CreateAnimalsServiceImpl implements CreateAnimalsService {
             animals.add(animalsFactory.getRandomAnimal());
         }
 
-        appendLogFile(DEFAULT_CREATE_ANIMALS_LOG_FILE_PATH, "CreateAnimalsServiceImpl.create(n)", animals);
+        appendLogFile(createAnimalsLogFilePath, "CreateAnimalsServiceImpl.create(n)", animals);
 
         return animals;
     }
@@ -98,7 +129,7 @@ public class CreateAnimalsServiceImpl implements CreateAnimalsService {
                 animals.put(animal.getType().toString(), animalsList);
             }
 
-            appendLogFile(DEFAULT_CREATE_ANIMALS_LOG_FILE_PATH, "CreateAnimalsServiceImpl.createMap(n)", i, animal);
+            appendLogFile(createAnimalsLogFilePath, "CreateAnimalsServiceImpl.createMap(n)", i, animal);
         }
 
         return animals;

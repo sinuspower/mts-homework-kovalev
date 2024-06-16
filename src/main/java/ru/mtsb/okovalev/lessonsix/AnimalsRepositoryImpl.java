@@ -33,6 +33,39 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
             );
 
     /**
+     * Путь к результирующему файлу метода {@link #findOlderAnimals(List, int)}.
+     */
+    private Path findOlderAnimalsJsonFilePath;
+
+    /**
+     * Задаёт значение по умолчанию пути к результирующему файлу
+     * метода {@link #findOlderAnimals(List, int)}.
+     */
+    public AnimalsRepositoryImpl() {
+        this.findOlderAnimalsJsonFilePath = DEFAULT_FIND_OLDER_ANIMALS_JSON_FILE_PATH;
+    }
+
+    /**
+     * Возвращает путь к результирующему файлу
+     * метода {@link #findOlderAnimals(List, int)}.
+     *
+     * @return Текущий путь к файлу
+     */
+    public Path getFindOlderAnimalsJsonFilePath() {
+        return findOlderAnimalsJsonFilePath;
+    }
+
+    /**
+     * Устанавливает новое значение пути к результирующему файлу
+     * метода {@link #findOlderAnimals(List, int)}.
+     *
+     * @param path Новый путь к файлу
+     */
+    public void setFindOlderAnimalsJsonFilePath(Path path) {
+        this.findOlderAnimalsJsonFilePath = path;
+    }
+
+    /**
      * Возвращает всех животных, которые родились в високосный год.
      *
      * @param animals Массив животных
@@ -93,7 +126,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
                     .ifPresent(a -> result.put(a, a.getAgeYears()));
         }
 
-        writeFindOlderAnimalsJsonFile(result);
+        writeFindOlderAnimalsJsonFile(result, findOlderAnimalsJsonFilePath);
 
         return result;
     }
@@ -105,13 +138,13 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      * @param source Объект - источник данных
      * @throws IOException если произошло исключение во время записи файла
      */
-    private void writeFindOlderAnimalsJsonFile(Map<Animal, Integer> source) throws IOException {
-        Path parent = DEFAULT_FIND_OLDER_ANIMALS_JSON_FILE_PATH.getParent();
+    private void writeFindOlderAnimalsJsonFile(Map<Animal, Integer> source, Path target) throws IOException {
+        Path parent = target.getParent();
         if (Files.notExists(parent)) {
             Files.createDirectories(parent);
         }
 
-        var file = new File(DEFAULT_FIND_OLDER_ANIMALS_JSON_FILE_PATH.toString());
+        var file = new File(target.toString());
         JSON_OBJECT_WRITER.writeValue(file, source.keySet());
     }
 

@@ -1,35 +1,24 @@
 [
 	{
-		"id": "e983e626-f6e0-4956-b4e0-245ae7da8ac1",
-		"secret": "eTdNN1M5M2Z2Wk5UMDdqajBGbVVhRUw1bA==",
-		"type": "DOG",
-		"breed": "Biewer Terrier",
-		"name": "Daisy",
-		"character": "blood",
-		"birthdate": "2007-09-08",
-		"age": 16,
-		"cost": 7173.539719414082
-	}, 
-	{
-		"id": "8d6598c6-b98b-4c62-abd6-11496b8658ee",
-		"secret": "WnJVc3pOSHFTTHRTYVVmZnVZM3E5RFBrQQ==",
+		"id": "33eac0e5-05ff-4ec0-a03d-ae38ba45b7dc",
+		"secret": "b3ZSTGNodzZBYnNkQlF1N1NQVjBrck9PUw==",
 		"type": "CAT",
 		"breed": "Sphynx",
-		"name": "Tweety",
-		"character": "ambitious",
-		"birthdate": "1999-04-22",
-		"age": 25,
-		"cost": 1828.1981945985299
+		"name": "Flower",
+		"character": "strong",
+		"birthdate": "2012-03-31",
+		"age": 12,
+		"cost": 282.2818643906422
 	}, 
 	{
-		"id": "175a3323-7359-4fb6-b4c6-3de3c518627c",
-		"secret": "SU9QekNnS3l6VWYxOGJLZ3BhbTRJaDZmbA==",
-		"type": "CAT",
-		"breed": "Chartreux",
-		"name": "Cesar",
-		"character": "nervous",
-		"birthdate": "2002-12-03",
-		"age": 21,
-		"cost": 1783.8059287647975
+		"id": "1ff9c279-fa28-4095-ae63-fb1ff9428102",
+		"secret": "aVRXZ0xaSWtwcUNWODFPb2FCTXdPcmhEbg==",
+		"type": "DOG",
+		"breed": "Bull Terrier",
+		"name": "Tweety",
+		"character": "sentimental",
+		"birthdate": "2005-07-31",
+		"age": 18,
+		"cost": 122.1060334076182
 	}
 ]
