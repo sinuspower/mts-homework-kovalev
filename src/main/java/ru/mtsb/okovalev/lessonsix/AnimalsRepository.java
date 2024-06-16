@@ -3,6 +3,7 @@ package ru.mtsb.okovalev.lessonsix;
 import ru.mtsb.okovalev.lessonthree.animals.Animal;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,12 @@ import java.util.Map;
  * Интерфейс содержит статистические методы для работы с животными.
  */
 public interface AnimalsRepository {
+    /**
+     * Путь по умолчанию к файлу с результатом работы метода {@link #findOlderAnimals(List, int)}.
+     */
+    Path DEFAULT_FIND_OLDER_ANIMALS_JSON_FILE_PATH =
+            Path.of("resources/results/findOlderAnimals.json");
+
     /**
      * Возвращает всех животных, которые родились в високосный год.
      *

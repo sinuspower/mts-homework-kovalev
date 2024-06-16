@@ -1,5 +1,6 @@
 package ru.mtsb.okovalev.lessonthree.animals;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalType;
 
 import java.time.LocalDate;
@@ -7,6 +8,7 @@ import java.time.LocalDate;
 /**
  * Кошка.
  */
+@JsonDeserialize(as = Cat.class)
 public class Cat extends Pet {
     private static final AnimalType TYPE = AnimalType.CAT;
 

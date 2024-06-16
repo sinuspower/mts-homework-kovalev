@@ -1,35 +1,35 @@
 [
 	{
-		"id": "5d6b1b15-c37e-4c4b-8e49-9833278313a1",
-		"secret": "OEw3SHdDbFZRc2REVkRDQVpRSWV2djV2",
+		"id": "e983e626-f6e0-4956-b4e0-245ae7da8ac1",
+		"secret": "eTdNN1M5M2Z2Wk5UMDdqajBGbVVhRUw1bA==",
+		"type": "DOG",
+		"breed": "Biewer Terrier",
+		"name": "Daisy",
+		"character": "blood",
+		"birthdate": "2007-09-08",
+		"age": 16,
+		"cost": 7173.539719414082
+	}, 
+	{
+		"id": "8d6598c6-b98b-4c62-abd6-11496b8658ee",
+		"secret": "WnJVc3pOSHFTTHRTYVVmZnVZM3E5RFBrQQ==",
 		"type": "CAT",
-		"breed": "Balinese",
-		"name": "Lola",
+		"breed": "Sphynx",
+		"name": "Tweety",
 		"character": "ambitious",
-		"birthdate": "1997-10-13",
-		"age": 26,
-		"cost": 2785.556172849595
+		"birthdate": "1999-04-22",
+		"age": 25,
+		"cost": 1828.1981945985299
 	}, 
 	{
-		"id": "a6362873-4f17-4f95-bfa3-fcb1c5d16141",
-		"secret": "SjRtNXJwR0htUWZJOVppZzI5cDVZcVFQ",
-		"type": "DOG",
-		"breed": "Bulldog",
-		"name": "Angel",
-		"character": "passionate",
-		"birthdate": "2003-04-21",
+		"id": "175a3323-7359-4fb6-b4c6-3de3c518627c",
+		"secret": "SU9QekNnS3l6VWYxOGJLZ3BhbTRJaDZmbA==",
+		"type": "CAT",
+		"breed": "Chartreux",
+		"name": "Cesar",
+		"character": "nervous",
+		"birthdate": "2002-12-03",
 		"age": 21,
-		"cost": 163.91368043005107
-	}, 
-	{
-		"id": "761d7b8f-a72e-4330-a1df-8bda0ad60c48",
-		"secret": "SHVGY3BUNmxGTzZ4V1g5bDRPN2dlMmxT",
-		"type": "DOG",
-		"breed": "Beagle",
-		"name": "Baby",
-		"character": "ambitious",
-		"birthdate": "2002-07-12",
-		"age": 21,
-		"cost": 3466.388557048522
+		"cost": 1783.8059287647975
 	}
 ]

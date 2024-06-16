@@ -28,6 +28,10 @@ public enum AnimalType {
         return this.printable;
     }
 
+    public String getName() {
+        return this.name();
+    }
+
     /**
      * Возвращает псевдослучайный вид животного из перечисления AnimalType.
      *

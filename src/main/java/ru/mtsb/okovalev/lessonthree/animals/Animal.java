@@ -1,6 +1,9 @@
 package ru.mtsb.okovalev.lessonthree.animals;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import ru.mtsb.okovalev.lessonnine.util.AnimalDeserializer;
 import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalType;
 
 import java.time.LocalDate;
@@ -8,6 +11,8 @@ import java.time.LocalDate;
 /**
  * Интерфейс содержит методы, описывающие поведение животного.
  */
+@JsonDeserialize(using = AnimalDeserializer.class)
+@JsonIgnoreProperties(ignoreUnknown = true) // ignore age and other possible unknown JSON fields
 public interface Animal {
     /**
      * Возвращает тип животного.

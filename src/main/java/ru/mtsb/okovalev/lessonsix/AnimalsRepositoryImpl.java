@@ -20,12 +20,6 @@ import java.util.stream.Collectors;
  */
 public class AnimalsRepositoryImpl implements AnimalsRepository {
     /**
-     * Путь по умолчанию к файлу с результатом работы метода {@link #findOlderAnimals(List, int)}.
-     */
-    public static final Path DEFAULT_FIND_OLDER_ANIMALS_FILE_PATH =
-            Path.of("resources/results/findOlderAnimals.json");
-
-    /**
      * ObjectWriter с заданными настройками форматирования результирующего JSON.
      */
     private static final ObjectWriter JSON_OBJECT_WRITER = new ObjectMapper()
@@ -112,12 +106,12 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      * @throws IOException если произошло исключение во время записи файла
      */
     private void writeFindOlderAnimalsJsonFile(Map<Animal, Integer> source) throws IOException {
-        Path parent = DEFAULT_FIND_OLDER_ANIMALS_FILE_PATH.getParent();
+        Path parent = DEFAULT_FIND_OLDER_ANIMALS_JSON_FILE_PATH.getParent();
         if (Files.notExists(parent)) {
             Files.createDirectories(parent);
         }
 
-        var file = new File(DEFAULT_FIND_OLDER_ANIMALS_FILE_PATH.toString());
+        var file = new File(DEFAULT_FIND_OLDER_ANIMALS_JSON_FILE_PATH.toString());
         JSON_OBJECT_WRITER.writeValue(file, source.keySet());
     }
 

@@ -24,12 +24,12 @@ public interface CreateAnimalsService {
     /**
      * Путь по умолчанию к файлу с логом создания животных.
      */
-    Path DEFAULT_LOG_FILE_PATH = Path.of("resources/animals/logData.txt");
+    Path DEFAULT_CREATE_ANIMALS_LOG_FILE_PATH = Path.of("resources/animals/createAnimalsLog.txt");
 
     /**
      * Формат даты-времени для лог-файла.
      */
-    String LOG_FILE_DATETIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
+    String CREATE_ANIMALS_LOG_FILE_DATETIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
 
     AnimalsFactory animalsFactory = new AnimalsFactory();
 
@@ -50,7 +50,7 @@ public interface CreateAnimalsService {
             i++;
         }
 
-        appendLogFile(DEFAULT_LOG_FILE_PATH, "CreateAnimalsService.create()", animals);
+        appendLogFile(DEFAULT_CREATE_ANIMALS_LOG_FILE_PATH, "CreateAnimalsService.create()", animals);
 
         return animals;
     }
@@ -86,7 +86,7 @@ public interface CreateAnimalsService {
             Files.createDirectories(parent);
         }
 
-        var dtf = DateTimeFormatter.ofPattern(LOG_FILE_DATETIME_FORMAT);
+        var dtf = DateTimeFormatter.ofPattern(CREATE_ANIMALS_LOG_FILE_DATETIME_FORMAT);
 
         Files.writeString(path,
                 String.format("[%s] %s %08d %s\n", LocalDateTime.now().format(dtf), method, counter, animal),

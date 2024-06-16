@@ -3,8 +3,6 @@ package ru.mtsb.okovalev.lessonthree;
 import ru.mtsb.okovalev.lessonthree.animals.Animal;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,7 +32,7 @@ public class CreateAnimalsServiceImpl implements CreateAnimalsService {
             i++;
         } while (i < DEFAULT_ANIMALS_COUNT);
 
-        appendLogFile(DEFAULT_LOG_FILE_PATH, "CreateAnimalsServiceImpl.create()", animals);
+        appendLogFile(DEFAULT_CREATE_ANIMALS_LOG_FILE_PATH, "CreateAnimalsServiceImpl.create()", animals);
 
         return animals;
     }
@@ -68,7 +66,7 @@ public class CreateAnimalsServiceImpl implements CreateAnimalsService {
             animals.add(animalsFactory.getRandomAnimal());
         }
 
-        appendLogFile(DEFAULT_LOG_FILE_PATH, "CreateAnimalsServiceImpl.create(n)", animals);
+        appendLogFile(DEFAULT_CREATE_ANIMALS_LOG_FILE_PATH, "CreateAnimalsServiceImpl.create(n)", animals);
 
         return animals;
     }
@@ -100,10 +98,8 @@ public class CreateAnimalsServiceImpl implements CreateAnimalsService {
                 animals.put(animal.getType().toString(), animalsList);
             }
 
-            appendLogFile(DEFAULT_LOG_FILE_PATH, "CreateAnimalsServiceImpl.createMap(n)", i, animal);
+            appendLogFile(DEFAULT_CREATE_ANIMALS_LOG_FILE_PATH, "CreateAnimalsServiceImpl.createMap(n)", i, animal);
         }
-
-        Files.writeString(DEFAULT_LOG_FILE_PATH, "\n", StandardOpenOption.APPEND);
 
         return animals;
     }

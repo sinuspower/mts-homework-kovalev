@@ -8,7 +8,10 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.*;
+import java.util.Base64;
+import java.util.Objects;
+import java.util.Random;
+import java.util.UUID;
 
 /**
  * Базовая абстракция животного.
@@ -148,9 +151,9 @@ public abstract class AbstractAnimal implements Animal {
     }
 
     @SuppressWarnings("unused")
-    @JsonSetter
+    @JsonSetter("secret")
     private void setSecretInformationDecoded(@JsonProperty("secret") String secretInformationEncoded) {
-        this.secretInformation = Arrays.toString(Base64.getDecoder().decode(secretInformationEncoded));
+        this.secretInformation = new String(Base64.getDecoder().decode(secretInformationEncoded));
     }
 
     @Override
