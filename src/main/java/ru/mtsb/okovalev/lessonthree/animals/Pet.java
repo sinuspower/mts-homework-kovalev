@@ -1,5 +1,6 @@
 package ru.mtsb.okovalev.lessonthree.animals;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import ru.mtsb.okovalev.lessonthree.animals.enums.AnimalType;
 
 import java.text.DecimalFormat;
@@ -140,6 +141,7 @@ public abstract class Pet extends AbstractAnimal {
      * @return дата рождения домашнего животного в формате this.birthdateFormat
      */
     @Override
+    @JsonIgnore
     public String getBirthdateFormatted() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(getBirthdateFormat());
         return super.birthdate.format(dtf);

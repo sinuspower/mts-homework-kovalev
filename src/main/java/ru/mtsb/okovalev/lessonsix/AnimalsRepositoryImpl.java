@@ -1,7 +1,16 @@
 package ru.mtsb.okovalev.lessonsix;
 
+import com.fasterxml.jackson.core.util.DefaultIndenter;
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
+import com.fasterxml.jackson.core.util.Separators;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import ru.mtsb.okovalev.lessonthree.animals.Animal;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -10,6 +19,52 @@ import java.util.stream.Collectors;
  * Имплементация интерфейса AnimalsRepository.
  */
 public class AnimalsRepositoryImpl implements AnimalsRepository {
+    /**
+     * ObjectWriter с заданными настройками форматирования результирующего JSON.
+     */
+    private static final ObjectWriter JSON_OBJECT_WRITER = new ObjectMapper()
+            .findAndRegisterModules() // for using of @JsonFormat(pattern = "yyyy-MM-dd") on LocalDate
+            .writer(new DefaultPrettyPrinter()
+                    .withArrayIndenter(new DefaultIndenter("\t", "\n"))
+                    .withObjectIndenter(new DefaultIndenter("\t", "\n"))
+                    .withSeparators(new Separators()
+                            .withObjectFieldValueSpacing(Separators.Spacing.AFTER)
+                            .withArrayValueSpacing(Separators.Spacing.AFTER))
+            );
+
+    /**
+     * Путь к результирующему файлу метода {@link #findOlderAnimals(List, int)}.
+     */
+    private Path findOlderAnimalsJsonFilePath;
+
+    /**
+     * Задаёт значение по умолчанию пути к результирующему файлу
+     * метода {@link #findOlderAnimals(List, int)}.
+     */
+    public AnimalsRepositoryImpl() {
+        this.findOlderAnimalsJsonFilePath = DEFAULT_FIND_OLDER_ANIMALS_JSON_FILE_PATH;
+    }
+
+    /**
+     * Возвращает путь к результирующему файлу
+     * метода {@link #findOlderAnimals(List, int)}.
+     *
+     * @return Текущий путь к файлу
+     */
+    public Path getFindOlderAnimalsJsonFilePath() {
+        return findOlderAnimalsJsonFilePath;
+    }
+
+    /**
+     * Устанавливает новое значение пути к результирующему файлу
+     * метода {@link #findOlderAnimals(List, int)}.
+     *
+     * @param path Новый путь к файлу
+     */
+    public void setFindOlderAnimalsJsonFilePath(Path path) {
+        this.findOlderAnimalsJsonFilePath = path;
+    }
+
     /**
      * Возвращает всех животных, которые родились в високосный год.
      *
@@ -41,13 +96,15 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      * Возвращает всех животных, которые строго старше заданного возраста в годах.
      * Если не найдено ни одного такого животного, то результат - самое старшее
      * животное, содержащееся во входящем массиве, и его возраст.
+     * Результат своей работы метод дополнительно записывает в файл в формате JSON.
      *
      * @param animals       Массив животных
      * @param ageYearsBound Возраст, строго старше которого должны быть все члены результирующей карты
      * @return Map; ключ - объект Animal, значение - возраст
+     * @throws IOException если произошло исключение во время записи результирующего файла
      */
     @Override
-    public Map<Animal, Integer> findOlderAnimals(List<Animal> animals, int ageYearsBound) {
+    public Map<Animal, Integer> findOlderAnimals(List<Animal> animals, int ageYearsBound) throws IOException {
         if (Objects.isNull(animals)) {
             return new HashMap<>();
         }
@@ -69,7 +126,26 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
                     .ifPresent(a -> result.put(a, a.getAgeYears()));
         }
 
+        writeFindOlderAnimalsJsonFile(result, findOlderAnimalsJsonFilePath);
+
         return result;
+    }
+
+    /**
+     * Записывает результат работы метода {@link #findOlderAnimals(List, int)} -
+     * массив объектов Animal - в файл в формате JSON.
+     *
+     * @param source Объект - источник данных
+     * @throws IOException если произошло исключение во время записи файла
+     */
+    private void writeFindOlderAnimalsJsonFile(Map<Animal, Integer> source, Path target) throws IOException {
+        Path parent = target.getParent();
+        if (Files.notExists(parent)) {
+            Files.createDirectories(parent);
+        }
+
+        var file = new File(target.toString());
+        JSON_OBJECT_WRITER.writeValue(file, source.keySet());
     }
 
     /**

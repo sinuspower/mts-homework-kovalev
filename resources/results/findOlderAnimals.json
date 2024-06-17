@@ -1,0 +1,24 @@
+[
+	{
+		"id": "33eac0e5-05ff-4ec0-a03d-ae38ba45b7dc",
+		"secret": "b3ZSTGNodzZBYnNkQlF1N1NQVjBrck9PUw==",
+		"type": "CAT",
+		"breed": "Sphynx",
+		"name": "Flower",
+		"character": "strong",
+		"birthdate": "2012-03-31",
+		"age": 12,
+		"cost": 282.2818643906422
+	}, 
+	{
+		"id": "1ff9c279-fa28-4095-ae63-fb1ff9428102",
+		"secret": "aVRXZ0xaSWtwcUNWODFPb2FCTXdPcmhEbg==",
+		"type": "DOG",
+		"breed": "Bull Terrier",
+		"name": "Tweety",
+		"character": "sentimental",
+		"birthdate": "2005-07-31",
+		"age": 18,
+		"cost": 122.1060334076182
+	}
+]

@@ -1,0 +1,10 @@
+[2024-06-16T19:17:39] CreateAnimalsServiceImpl.create(n) 00000000 {"type":"Shark","breed":"Sandbar shark","character":"strong","name":"Angel","birthdate":"13-12-2018","secretInformation":"61EaBeElaagqvUuMK0Jx4Pbrp"}
+[2024-06-16T19:17:39] CreateAnimalsServiceImpl.create(n) 00000001 {"type":"Dog","breed":"Australian Shepherd","character":"passionate","name":"Lola","birthdate":"26-09-2009","cost":"$8589,30","secretInformation":"A4PimDpoX21YSHwzYIPZRnCyS"}
+[2024-06-16T19:17:39] CreateAnimalsServiceImpl.create(n) 00000002 {"type":"Wolf","breed":"Northwestern wolf","character":"apathetic","name":"Baby","birthdate":"20-05-2003","secretInformation":"h0u79nHgwUfolr6vAsdRCJPxJ"}
+[2024-06-16T19:17:39] CreateAnimalsServiceImpl.create(n) 00000003 {"type":"Wolf","breed":"Eastern wolf","character":"sentimental","name":"Tweety","birthdate":"21-09-2010","secretInformation":"0qJ9Dqdmf3D4esF0tm0n7IhUU"}
+[2024-06-16T19:17:39] CreateAnimalsServiceImpl.create(n) 00000004 {"type":"Wolf","breed":"Eurasian wolf","character":"passionate","name":"Tweety","birthdate":"07-02-2021","secretInformation":"gaAsM59wKPyyKtwH0Kh6Q2s6z"}
+[2024-06-16T20:06:41] CreateAnimalsServiceImpl.create(n) 00000000 {"type":"Dog","breed":"Biewer Terrier","character":"blood","name":"Cesar","birthdate":"27-05-2024","cost":"$1635,93"}
+[2024-06-16T20:06:41] CreateAnimalsServiceImpl.create(n) 00000001 {"type":"Cat","breed":"Sphynx","character":"amorphous","name":"Cuddles","birthdate":"23-08-2021","cost":"$890,38"}
+[2024-06-16T20:06:41] CreateAnimalsServiceImpl.create(n) 00000002 {"type":"Shark","breed":"Leopard shark","character":"blood","name":"Cuddles","birthdate":"15-07-2017"}
+[2024-06-16T20:06:41] CreateAnimalsServiceImpl.create(n) 00000003 {"type":"Cat","breed":"Sphynx","character":"strong","name":"Flower","birthdate":"31-03-2012","cost":"$282,28"}
+[2024-06-16T20:06:41] CreateAnimalsServiceImpl.create(n) 00000004 {"type":"Dog","breed":"Bull Terrier","character":"sentimental","name":"Tweety","birthdate":"31-07-2005","cost":"$122,11"}

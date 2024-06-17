@@ -2,6 +2,8 @@ package ru.mtsb.okovalev.lessonsix;
 
 import ru.mtsb.okovalev.lessonthree.animals.Animal;
 
+import java.io.IOException;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +12,12 @@ import java.util.Map;
  * Интерфейс содержит статистические методы для работы с животными.
  */
 public interface AnimalsRepository {
+    /**
+     * Путь по умолчанию к файлу с результатом работы метода {@link #findOlderAnimals(List, int)}.
+     */
+    Path DEFAULT_FIND_OLDER_ANIMALS_JSON_FILE_PATH =
+            Path.of("resources/results/findOlderAnimals.json");
+
     /**
      * Возвращает всех животных, которые родились в високосный год.
      *
@@ -22,13 +30,15 @@ public interface AnimalsRepository {
     /**
      * Возвращает всех животных, которые строго старше заданного возраста в годах.
      * Если не найдено ни одного такого животного, то результат - самое старшее животное,
-     * содержащее во входящем массиве.
+     * содержащее во входящем массиве. Результат своей работы метод дополнительно
+     * записывает в файл в формате JSON.
      *
      * @param animals       Массив животных
      * @param ageYearsBound Возраст, строго старше которого должны быть все члены результирующей карты
      * @return Map; ключ - объект Animal, значение - возраст
+     * @throws IOException если произошло исключение во время записи результирующего файла
      */
-    Map<Animal, Integer> findOlderAnimals(List<Animal> animals, int ageYearsBound);
+    Map<Animal, Integer> findOlderAnimals(List<Animal> animals, int ageYearsBound) throws IOException;
 
     /**
      * Выводит на экран дубликаты животных и возвращает списки найденных дубликатов для каждого
